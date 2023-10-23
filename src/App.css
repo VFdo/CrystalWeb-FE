@@ -36,11 +36,12 @@ p{
 
 button{
   margin: 10px;
-  font-size: 14px;
+  margin-left: 10px;
+  font-size: 12px;
   font-weight: 500;
   padding: 10px 10px;
   border: 1px solid white;
-  width: 6rem;
+  width: 15rem;
   border-radius: 30px;
   font-size: 14px;
   background-color: var(--primary);
@@ -192,6 +193,20 @@ footer .footer-tel:hover {
 }
 .links a:hover{
   color: var(--darken);
+}
+
+.banner {
+  background-image: url(./assets/background.jpg);
+  width: 100%;
+  height: 80vh;
+  background-position: top 25% right 0;
+  background-size: cover;
+  width: 100%;
+  padding: 0 80px;
+  align-items: flex-start;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 /* login starts */
