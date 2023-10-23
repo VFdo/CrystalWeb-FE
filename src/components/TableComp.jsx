@@ -59,7 +59,7 @@ export default class TableComp extends Component {
     });
   };
 
-  //Example of the data that is return from my local API
+  // sample data since BE not connected
   getDateSrc = () => {
     return [
       {
@@ -406,7 +406,7 @@ export default class TableComp extends Component {
     return (
       <div className="home">
         <div className="btnContainer">
-          <span>New Equipment</span>
+          <span>New Pet</span>
           <i
             id="addIcon"
             className="fa fa-plus-circle"
@@ -417,7 +417,7 @@ export default class TableComp extends Component {
         <MUIDataTable
           title={
             <Typography variant="h6">
-              List of Equipments
+              List of Pets
               {isLoading && (
                 <CircularProgress
                   size={24}
