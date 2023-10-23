@@ -73,161 +73,107 @@ export default class TableComp extends Component {
         previousPage: null,
         data: [
           {
-            id: 3,
-            name: "Lenovo_Yoga11",
-            location: "Rue Neuve 123, 1000 Bruxelles",
-            description: "Lenovo Yoga S940",
-            picturePath: null,
-            status: "Operating",
-            dateAdded: "2020-09-01T00:00:00",
-            maintenances: []
+            "id": 1,
+            "name": "Fluffy",
+            "dob": "2019-05-15T00:00:00",
+            "typeOfAnimal": "Cat",
+            "picturePath": null,
+            "status": "Sick",
+            "dateAdded": "2022-01-10T00:00:00",
+            "maintenances": []
           },
           {
-            id: 7,
-            name: "Toshiba_Satellite11",
-            location: "Boulevard Lambermont 1, 1000 Bruxelles",
-            description: "Toshiba Satellite C55-B5300 16-Inch Laptop",
-            picturePath: null,
-            status: "Operating",
-            dateAdded: "2020-08-19T00:00:00",
-            maintenances: []
+            "id": 2,
+            "name": "Rex",
+            "dob": "2020-03-20T00:00:00",
+            "typeOfAnimal": "Dog",
+            "picturePath": null,
+            "status": "Healthy",
+            "dateAdded": "2022-04-05T00:00:00",
+            "maintenances": []
           },
           {
-            id: 5,
-            name: "Toshib_Satellite y11",
-            location: "Chaussée d'Ixelles 84/86, 1050 Ixelles",
-            description: "Toshiba Satellite S55-C5274 15.6 Inch",
-            picturePath: null,
-            status: "Maintenance",
-            dateAdded: "2020-08-05T00:00:00",
-            maintenances: []
+            "id": 3,
+            "name": "Whiskers",
+            "dob": "2018-11-12T00:00:00",
+            "typeOfAnimal": "Cat",
+            "picturePath": null,
+            "status": "Sick",
+            "dateAdded": "2022-02-18T00:00:00",
+            "maintenances": []
           },
           {
-            id: 4,
-            name: "Lenovo_Ideapad11",
-            location: "Boulevard Sylvain Dupuis 433, 1070 Anderlecht",
-            description: "Lenovo Ideapad 330-15ARR",
-            picturePath: null,
-            status: "Maintenance",
-            dateAdded: "2020-08-02T00:00:00",
-            maintenances: []
+            "id": 4,
+            "name": "Buddy",
+            "dob": "2019-08-05T00:00:00",
+            "typeOfAnimal": "Dog",
+            "picturePath": null,
+            "status": "Healthy",
+            "dateAdded": "2022-03-10T00:00:00",
+            "maintenances": []
           },
           {
-            id: 2,
-            name: "Lenovo_Legion11",
-            location: "Chaussée de Louvain 610, 1030 Schaerbeek",
-            description: "Lenovo Legion Y740 (81UH006YIN)",
-            picturePath: null,
-            status: "Operating",
-            dateAdded: "2020-08-01T00:00:00",
-            maintenances: []
+            "id": 5,
+            "name": "Nibbles",
+            "dob": "2020-07-25T00:00:00",
+            "typeOfAnimal": "Rabbit",
+            "picturePath": null,
+            "status": "Sick",
+            "dateAdded": "2022-05-15T00:00:00",
+            "maintenances": []
           },
           {
-            id: 6,
-            name: "TOSHIBA_Laptop11",
-            location: "Rue Saint-Lambert 200, 1200 Woluwe-Saint-Lambert",
-            description: "TOSHIBA Laptop Tecra A50-01R01S Intel Core i7",
-            picturePath: null,
-            status: "Maintenance",
-            dateAdded: "2020-07-01T00:00:00",
-            maintenances: []
+            "id": 6,
+            "name": "Tigger",
+            "dob": "2017-02-28T00:00:00",
+            "typeOfAnimal": "Cat",
+            "picturePath": null,
+            "status": "Sick",
+            "dateAdded": "2022-01-25T00:00:00",
+            "maintenances": []
           },
           {
-            id: 1,
-            name: "Lenovo_IdeaPad_Slim_311",
-            location: "Berchem-Sainte-Agathe",
-            description: null,
-            picturePath: null,
-            status: "Operating",
-            dateAdded: null,
-            maintenances: []
+            "id": 7,
+            "name": "Max",
+            "dob": "2019-04-10T00:00:00",
+            "typeOfAnimal": "Dog",
+            "picturePath": null,
+            "status": "Healthy",
+            "dateAdded": "2022-03-01T00:00:00",
+            "maintenances": []
+          },
+          {
+            "id": 8,
+            "name": "Cotton",
+            "dob": "2020-06-08T00:00:00",
+            "typeOfAnimal": "Rabbit",
+            "picturePath": null,
+            "status": "Sick",
+            "dateAdded": "2022-05-20T00:00:00",
+            "maintenances": []
+          },
+          {
+            "id": 9,
+            "name": "Luna",
+            "dob": "2018-12-14T00:00:00",
+            "typeOfAnimal": "Cat",
+            "picturePath": null,
+            "status": "Sick",
+            "dateAdded": "2022-01-15T00:00:00",
+            "maintenances": []
+          },
+          {
+            "id": 10,
+            "name": "Rocky",
+            "dob": "2019-09-30T00:00:00",
+            "typeOfAnimal": "Dog",
+            "picturePath": null,
+            "status": "Healthy",
+            "dateAdded": "2022-04-20T00:00:00",
+            "maintenances": []
           }
-        ],
-        succeeded: true,
-        errors: null,
-        message: null
-      },
-      {
-        pageNumber: 2,
-        pageSize: 10,
-        firstPage: null,
-        lastPage: null,
-        totalPages: 0,
-        totalRecords: 14,
-        nextPage: null,
-        previousPage: null,
-        data: [
-          {
-            id: 3,
-            name: "Lenovo_Yoga22",
-            location: "Rue Neuve 123, 1000 Bruxelles",
-            description: "Lenovo Yoga S940",
-            picturePath: null,
-            status: "Operating",
-            dateAdded: "2020-09-01T00:00:00",
-            maintenances: []
-          },
-          {
-            id: 7,
-            name: "Toshiba_Satellite22",
-            location: "Boulevard Lambermont 1, 1000 Bruxelles",
-            description: "Toshiba Satellite C55-B5300 16-Inch Laptop",
-            picturePath: null,
-            status: "Operating",
-            dateAdded: "2020-08-19T00:00:00",
-            maintenances: []
-          },
-          {
-            id: 5,
-            name: "Toshib_Satellite y22",
-            location: "Chaussée d'Ixelles 84/86, 1050 Ixelles",
-            description: "Toshiba Satellite S55-C5274 15.6 Inch",
-            picturePath: null,
-            status: "Maintenance",
-            dateAdded: "2020-08-05T00:00:00",
-            maintenances: []
-          },
-          {
-            id: 4,
-            name: "Lenovo_Ideapad22",
-            location: "Boulevard Sylvain Dupuis 433, 1070 Anderlecht",
-            description: "Lenovo Ideapad 330-15ARR",
-            picturePath: null,
-            status: "Maintenance",
-            dateAdded: "2020-08-02T00:00:00",
-            maintenances: []
-          },
-          {
-            id: 2,
-            name: "Lenovo_Legion22",
-            location: "Chaussée de Louvain 610, 1030 Schaerbeek",
-            description: "Lenovo Legion Y740 (81UH006YIN)",
-            picturePath: null,
-            status: "Operating",
-            dateAdded: "2020-08-01T00:00:00",
-            maintenances: []
-          },
-          {
-            id: 6,
-            name: "TOSHIBA_Laptop22",
-            location: "Rue Saint-Lambert 200, 1200 Woluwe-Saint-Lambert",
-            description: "TOSHIBA Laptop Tecra A50-01R01S Intel Core i7",
-            picturePath: null,
-            status: "Maintenance",
-            dateAdded: "2020-07-01T00:00:00",
-            maintenances: []
-          },
-          {
-            id: 1,
-            name: "Lenovo_IdeaPad_Slim_322",
-            location: "Berchem-Sainte-Agathe",
-            description: null,
-            picturePath: null,
-            status: "Operating",
-            dateAdded: null,
-            maintenances: []
-          }
-        ],
+        ]
+        ,
         succeeded: true,
         errors: null,
         message: null
@@ -367,12 +313,12 @@ export default class TableComp extends Component {
         }
       },
       {
-        name: "description",
-        label: "Description",
+        name: "typeOfAnimal",
+        label: "Pet Type",
         options: {
           filter: true,
           customBodyRenderLite: (dataIndex) => {
-            return <span>{this.state.data[dataIndex].description}</span>;
+            return <span>{this.state.data[dataIndex].typeOfAnimal}</span>;
           }
         }
       },
@@ -383,7 +329,7 @@ export default class TableComp extends Component {
           filter: true,
           customBodyRenderLite: (dataIndex) => {
             const state = this.state.data[dataIndex].status;
-            if (state === "Operating") {
+            if (state === "Healthy") {
               return (
                 <div className="operating">
                   <span>{state}</span>
@@ -400,12 +346,12 @@ export default class TableComp extends Component {
         }
       },
       {
-        name: "location",
-        label: "Location",
+        name: "dob",
+        label: "Date of Birth",
         options: {
           filter: true,
           customBodyRenderLite: (dataIndex) => {
-            return <span>{this.state.data[dataIndex].location}</span>;
+            return <span>{this.state.data[dataIndex].dob}</span>;
           }
         }
       },
