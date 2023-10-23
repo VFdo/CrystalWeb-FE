@@ -43,8 +43,10 @@ const header = () => {
                     <Link  to={'shop'}>Shop</Link>
                     <Link  to={'contact'}>Contact Us</Link>
                 </div>
-                <div className="col-2"></div>
-                <div className="col-2 d-flex align-items-center justify-content-between">
+                
+                <div className="col-1 d-flex align-items-right justify-content-between">
+                    <button className='button2'>Demo Client</button>
+                    <button className='button1'>Demo Table</button>
                     <button className='button1'>Log In</button>
                     <button className='button2'>Sign Up</button>
 

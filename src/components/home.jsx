@@ -12,7 +12,7 @@ const home = () => {
             <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                   <div className='back-details'>
-                  <p className='mb-3 text'> </p>
+                  <p className='mb-3 text '> </p>
                   <h1>The Best Animal Hospital</h1>
                   <h2>For Your Companion</h2>
 
