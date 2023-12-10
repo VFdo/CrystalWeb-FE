@@ -18,9 +18,6 @@ const layout = () => {
     <Header/>
     <Outlet/>
     <Home/>
-    <About/>
-    <Services/>
-    <Shop/>
     <Newsletter/>
     <Contact/>
     <Footer/>

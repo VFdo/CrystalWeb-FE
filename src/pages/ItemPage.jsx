@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import PetDetailsForm from './pet/PetDetailsForm';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -34,7 +35,6 @@ export default function ItemPage() {
         </Toolbar> */}
       </AppBar>
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: 'background.paper',
@@ -67,7 +67,8 @@ export default function ItemPage() {
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
+
+          {/* cards */}
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
@@ -99,10 +100,9 @@ export default function ItemPage() {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
+
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          {/* Footer */}
         </Typography>
         <Typography
           variant="subtitle1"
@@ -110,9 +110,10 @@ export default function ItemPage() {
           color="text.secondary"
           component="p"
         >
-          ©Developed by Vidu Fernando 2023
+          {/* ©Developed by Vidu Fernando 2023 */}
         </Typography>
       </Box>
+      <PetDetailsForm />
       {/* End footer */}
     </ThemeProvider>
   );
