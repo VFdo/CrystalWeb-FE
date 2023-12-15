@@ -9,7 +9,7 @@ import EmployeeDetailsForm from './pages/employee/EmployeeDetailsForm.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-    <TableComp />
+    {/* <TableComp /> */}
     <EmployeeDetailsForm />
 
   </React.StrictMode>,
