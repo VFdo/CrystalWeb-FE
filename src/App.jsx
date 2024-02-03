@@ -21,7 +21,7 @@ function App() {
         <Route path='about' element={<About/>}/>
         <Route path='shop' element={<Shop/>}/>
         {/* <Route path='services' element={<PetPage titleText = "test" descriptionText = "desc" buttonLeft = "view" buttonRight = "history"/>}/> */}
-        <Route path='services' element={<PetHistory/>}/>
+        <Route path='services' element={<PetPage/>}/>
         <Route path='contact' element={<Contact/>}/>
           
         </Route>
