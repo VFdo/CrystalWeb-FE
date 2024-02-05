@@ -1,13 +1,21 @@
 import React from 'react'
+import Paw from '../assets/paw.png'
+import { useRef } from 'react';
 
-const contact = () => {
+function contact () {
+  const ref = useRef(null);
+
+  const handleClick = () => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
   return <>
-   <section className="contact-wrapper p-5">
+   <section ref={ref} id='contact' className="contacts-wrapper p-5">
     <div className="container-xxl">
       <div className="row">
       <div className="col-12 text-center">
-            <h1 className=" text">Reach Out to Us</h1>
-            <p className=' text fs-2'>We are only a step away from you</p>
+            <h1 className="text">Reach Out to Us</h1>
+            <p className=' text2 fs-3'>We are only a step away from you</p>
+            <img src={Paw} alt="image here"  className='paw d-flex align-items-right justify-content-between'/>
         </div>
       </div>
     </div>
@@ -37,7 +45,7 @@ const contact = () => {
                   <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div className='col-12 text-center gap-2'>
-                <button id='button-link' type="submit">Submit</button>
+                <button onClick={handleClick} id='button-link' type="submit" className='submit'>Submit</button>
                 </div>
             </div>
           </div>

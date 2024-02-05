@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import background from '../assets/background.jpg'
+import Appointment from '../components/appointment'
 
-const home = () => {
-  return <>
-  <section className="banner">
+function home() {
+  return (
+    <section id='home' className="banner">
     <div className="container-xxl">
       <div className="row">
           <div className="col-lg-12 col-md-12 col-sm-12">
@@ -16,9 +15,8 @@ const home = () => {
                   <h1>The Best Animal Hospital</h1>
                   <h2>For Your Companion</h2>
 
-                  <p className='mb-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-                  <button className='links button3'><Link to='/shop' >Make an Appointment</Link></button>
+                  <p className='mb-3'>No one appreciates the very special genius of your conversation <br />as the pet does.</p>
+                  <Appointment/>
                   </div>
               </div>
             </div>
@@ -27,7 +25,7 @@ const home = () => {
       </div>
     </div>
   </section>
-  </>
+  )
 }
 
 export default home
