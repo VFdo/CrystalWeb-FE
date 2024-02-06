@@ -9,6 +9,8 @@ import Contact from './components/contact'
 import ItemPage from './pages/ItemPage'
 import PetPage from './pages/pet/PetPage'
 import PetHistory from './pages/pet/PetHistory'
+import PetDetailsForm from './pages/pet/PetDetailsForm'
+import ChatComponent from './pages/pet/ChatComponent'
 
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
         <Route path='about' element={<About/>}/>
         <Route path='shop' element={<Shop/>}/>
         {/* <Route path='services' element={<PetPage titleText = "test" descriptionText = "desc" buttonLeft = "view" buttonRight = "history"/>}/> */}
-        <Route path='services' element={<PetPage/>}/>
+        <Route path='services' element={<ChatComponent/>}/>
         <Route path='contact' element={<Contact/>}/>
           
         </Route>
