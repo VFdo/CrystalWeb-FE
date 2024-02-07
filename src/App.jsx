@@ -12,6 +12,7 @@ import PetHistory from './pages/pet/PetHistory'
 import PetDetailsForm from './pages/pet/PetDetailsForm'
 import AppointmentDetailsForm from './pages/appointment/AppointmentDetailsForm'
 import AppointmentTable from './pages/appointment/AppointmentTable'
+import AppointmentPage from './pages/appointment/AppointmentPage'
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         <Route path='about' element={<About/>}/>
         <Route path='shop' element={<Shop/>}/>
         {/* <Route path='services' element={<PetPage titleText = "test" descriptionText = "desc" buttonLeft = "view" buttonRight = "history"/>}/> */}
-        <Route path='services' element={<PetPage/>}/>
+        <Route path='services' element={<AppointmentDetailsForm/>}/>
         <Route path='contact' element={<Contact/>}/>
           
         </Route>
