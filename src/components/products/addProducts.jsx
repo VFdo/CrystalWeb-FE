@@ -1,19 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
-import {addProducts} from "../utils/ApiFunctions"
+import {Link} from 'react-router-dom'
+import {addProduct} from "../utils/ApiFunctions"
+import ProductTypeSelector from '../common/ProductTypeSelector'
 
 const addProducts = () => {
   const [newProduct, setnewProduct] = useState({
     photo : null,
     catergory:"",
     price:"",
-    productName: "",
-    description: ""
   })
 
   const [imagePreview, setImagePreview] = useState("")
   const [successMessage,setSucessMessage] = useState("")
-  const [erroeMessage,setErrorMessage] = useState("")
+  const [errorMessage,setErrorMessage] = useState("")
 
   const handleProductInputChange = (e)=>{
     const name = e.target.name
@@ -34,13 +34,13 @@ const addProducts = () => {
     setImagePreview(URL.createObjectURL(selectedImage))
   }
 
-  const handleSubmit =async (e) =>{
+  const handleSubmit =async(e) =>{
     e.preventDefault()
     try{
-      const sucess = await addProducts(newProduct.photo,newProduct.catergory, newProduct.productName, newProduct.description, newProduct.price);
-      if(success !==undefined){
+      const sucess = await addProduct(newProduct.photo,newProduct.catergory, newProduct.price);
+      if(sucess !==undefined){
         setSucessMessage("A new Product was added to the list")
-        setnewProduct({photo: null, category:"", price:"",productName:"",description:""})
+        setnewProduct({photo: null, category:"", price:""})
         setImagePreview("")
         setErrorMessage("")
       }else{
@@ -49,11 +49,11 @@ const addProducts = () => {
     }catch(error){
       setErrorMessage(error.message)
     }
+    setTimeout(()=> {
+      setSucessMessage("")
+      setErrorMessage("")
+    },3000)
   }
-
-
-
-
 
   return (
     <>
@@ -61,20 +61,26 @@ const addProducts = () => {
       <div className='row justify-content-center'>
         <div className='col-md-8 col-lg-6'>
           <h2 className='mt-5 mb-2'>Add New Product</h2>
+          {successMessage && (
+            <div className='alert alert-sucess fade show'>{successMessage}</div>
+          )}
+          {errorMessage && (
+            <div className='alert alert-danger fade show'>{errorMessage}</div>
+          )}
+
           <form onSubmit={handleSubmit} >
             <div className='mb-3'>
               <label htmlFor="catergory" className="form-label">Catergory</label>
-              <div></div>
+              <div>
+                <ProductTypeSelector handleProductInputChange={handleProductInputChange} newProduct={newProduct}/>
+              </div>
             </div>
             <div className='mb-3'>
               <label htmlFor="price" className="form-label">Product Price</label>
               <input
-                className = "form-control"
-                required
+                className ="form-control"
                 id ="price"
-                name='price'
-                type='number'
-                value={newProduct.price}
+                name="price"
                 onChange={handleProductInputChange}
                  />
               
@@ -93,6 +99,9 @@ const addProducts = () => {
                ) }
             </div>
             <div className='d-grid d-md-flex mt-2'>
+              <Link to={"/existing-products"} className="btn btn-outline-info">
+                Back
+              </Link>
               <button className='btn btn-outline-primary ml-5'>Save Product</button>
             </div>
 
