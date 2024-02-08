@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import '../../App.css'
 import { useState , useEffect} from "react";
 import { Box } from '@mui/material';
 import { Typography } from '@mui/material';
@@ -8,145 +8,99 @@ import {TextField} from '@mui/material';
 import {MenuItem} from '@mui/material';
 import { FormControl, FormLabel } from '@mui/material';
 import {Stack} from '@mui/material';
-import Header from '../../components/header'
-import Footer from '../../components/footer'
 
 
+function AppointmentPage() {
 
-import InputFileUpload from "../../components/buttons/InputFileUpload";
+  const [formData, setFormData] = useState({
+    username: 'name',
+    petid: 'ID',
+    date: '',
+    time: '',
+  })
 
-const styles = {
-    modalBox: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 800,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      p: 5,
-    },
-    formContainer: {
-      textAlign: 'center',
-    },
-    formControl: {
-      gap: 30,
-    },
-  };
-  
-  const AppointmentForm = ({ appointmentData, onClose, onChange, onSave }) => {
-    
-    const handleIdChange = (event) => {
-        onChange({ ...appointmentData, id: event.target.value });
-    };
-    const handleDateChange = (event) => {
-        onChange({...appointmentData, appointmentDate: event.target.value});
+  const onChangeHandler = (event) => {
+
+    console.log(event)
+    if (event.target.name === 'languages') {
+
+      let copy = { ...formData }
+
+      if (event.target.checked) {
+        copy.languages.push(event.target.value)
+      } else {
+        copy.languages = copy.languages.filter(el => el !== event.target.value)
+      }
+
+      setFormData(copy)
+
+    } else {
+      setFormData(() => ({
+        ...formData,
+        [event.target.name]: event.target.value
+      }))
     }
-    const handleTimeChange = (event) => {
-        onChange({ ...appointmentData, id: event.target.value });
-    };
-    
-    
-    
-    return (
-      
-        <div style={styles.formContainer}>
-          <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
-            Fill Appointment Information
-          </Typography>
-          <FormControl style={styles.formControl}>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 5 }}>
-              <FormLabel sx={{ minWidth: 100 }}>Enter Pet ID</FormLabel>
-              <TextField value={appointmentData.id} onChange={handleIdChange} 
-                 helperText="Please enter your pets ID number"
-                 id="demo-helper-text-misaligned"
-                 label="id"/>
-            </Stack>
+  }
 
-            <Stack 
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}>
-                <FormLabel sx={{minWidth:100}}>Enter Appointment Date</FormLabel>
-                <TextField type="date" sx={{flex:1}}
-                    value={appointmentData.appointmentDate}
-                    onChange={handleDateChange}
-                    helperText="The Clinic is closed on all Sundays and Poya Days"
-                    id="demo-helper-text-misaligned"
-                ></TextField>
-            </Stack>
-            <Stack 
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}>
-                <FormLabel sx={{minWidth:100}}>Enter Appointment time</FormLabel>
-                <TextField type="time" sx={{flex:1}}
-                    value={appointmentData.appointmentTime}
-                    onChange={handleTimeChange}
-                     helperText="The Appointment times are avail
-                     
-                      from 9.00AM to 7.00PM"
-                    id="demo-helper-text-misaligned"
-                ></TextField>
-            </Stack>
-
-
-            <br></br>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 5, sm: 5, md: 12 }} justifyContent="center">
-              <Button variant="outlined" onClick={onClose}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={onSave}>
-                Save
-              </Button>
-            </Stack>
-          </FormControl>
+  const onSubmitHandler = (event) => {
+    event.preventDefault()
+    console.log(formData)
+  }
+  return (
+    <>
+    <section className="contact-wrapper p-5">
+    <div className="container-xxl">
+      <div className="row">
+      <div className="col-12 text-center">
+            <h1 className=" text">Its Quick and Easy</h1>
+            <p className=' text fs-2'>We are only a step away from you</p>
         </div>
-    
-    );
-  };
-
-  const AppointmentPage= () => {
-    const [data, setData] = useState({ id: '', date: '', time: '' });
-    const [open, setOpen] = useState(false);
-  
-    useEffect(() => {
-      console.log('Fetching data...');
-      fetch('http://localhost:8080/appointment/718efa32-5abd-4337-b8af-a03803f72193')
-        .then((res) => res.json())
-        .then((fetchedData) => {
-          console.log('Data received:', fetchedData);
-          setData(fetchedData);
-        })
-        .catch((err) => {
-          console.error('Error during fetch:', err);
-        });
-    }, []);
-  
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-  
-    const handleSave = () => {
-    console.log('saving...', data);
-      fetch('http://localhost:8080/appointment/718efa32-5abd-4337-b8af-a03803f72193', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((responseData) => console.log('Data saved:', responseData))
-        .catch((error) => console.error('Error saving data:', error));
-    };
-  
-    return (
-      <div>
-        <Header/>
-        <Button onClick={handleOpen}>Open modal</Button>
-        <AppointmentForm/>
-        <Footer/>
       </div>
-    );
-  };
-  
-  export default AppointmentPage;
+    </div>
+  </section>
+
+    <div className='contact-message p-0'>
+        <div className='container-xxl'>
+            <div className='row'>
+                <div className='col-lg-8 col-md-10 col-sm-12 m-auto'>
+                    <div className="card p-5">
+                         <h2 className='text-center mb-4'>Make an Appointment here</h2>
+                         <h3 className='text-center mb-4'>Open everyday from 9.00AM - 4.30PM</h3>
+                         <div className=" d-flex align-items-center justify-content-center">
+                           <div className="row g-3">
+                                <div className="Appointment">
+                                    <form onSubmit={onSubmitHandler}>
+                                    <div className="form-group">
+                    <label htmlFor="username" className="form-label">Enter your name</label>
+          <input className="form-control" name="username" onChange={onChangeHandler} value={formData.username} placeholder='Name' aria-label='Name'/>
+        </div>
+        <div>
+             <label htmlFor="time" className="form-label">Enter Pet ID</label>
+             <input  className="form-control" name="time" onChange={onChangeHandler} value={formData.petid} placeholder='id' aria-label='Pet ID'/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="date" className="form-label">Appointment Date</label>
+          <input type="date" className="form-control" name="date" onChange={onChangeHandler} value={formData.date} placeholder='date' aria-label='Appointment date'/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="time" className="form-label">Appointment Time</label>
+          <input type="time" className="form-select" name="time" onChange={onChangeHandler} value={formData.time} placeholder='time' aria-label='time'/>
+        </div>
+        <div className="form-group">
+          <button id="button-link" type="submit" >Submit</button>
+        </div>
+      </form>
+    </div>
+                            </div> 
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </>
+    
+  );
+}
+
+export default AppointmentPage;

@@ -23,9 +23,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout/>}>
         <Route path='about' element={<About/>}/>
-        <Route path='shop' element={<Shop/>}/>
+        <Route path='shop' element={<PetDetailsForm/>}/>
         {/* <Route path='services' element={<PetPage titleText = "test" descriptionText = "desc" buttonLeft = "view" buttonRight = "history"/>}/> */}
-        <Route path='services' element={<AppointmentDetailsForm/>}/>
+        <Route path='services' element={<AppointmentPage/>}/>
         <Route path='contact' element={<Contact/>}/>
           
         </Route>
