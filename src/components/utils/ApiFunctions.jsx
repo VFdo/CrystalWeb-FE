@@ -19,7 +19,44 @@ export async function addProduct(photo,productPrice,productType){
         return false
     }
 }
+export async function addAppointment(photo,clientName,phoneNumber,
+    emailAddress,checkInDate,checkInTime,
+    numberOfPets){
+    const formData = new  FormData();
 
+    formData.append("photo",photo)
+    formData.append("clientName",clientName)
+    formData.append("phoneNumber",phoneNumber)
+    formData.append("emailAddress",emailAddress)
+    formData.append("checkInDate",checkInDate)
+    formData.append("checkInTime",checkInTime)
+    formData.append("numberOfPets",numberOfPets)
+    
+
+    const response = await api.post("/appointments/add/new-appointment",formData)
+    if(response.status === 201){
+        return true
+    }else{
+        return false
+    }
+}
+export async function addContact(clientName, phoneNumber,
+    emailAddress,message){
+    const formData = new  FormData();
+
+    formData.append("clientName",clientName)
+    formData.append("phoneNumber",phoneNumber)
+    formData.append("emailAddress",emailAddress)
+    formData.append("numberOfPets",message)
+    
+
+    const response = await api.post("/messages/add/new-message",formData)
+    if(response.status === 201){
+        return true
+    }else{
+        return false
+    }
+}
 /*This function get all prduct catergorys*/
 export  async function getProductCatergory(){
     try{
@@ -50,11 +87,11 @@ export async function deleteProduct(productId){
 }
 
 /*This function update product by Id */
-export async function updateProduct(productId, productData){
+export async function updateProduct(productId, product){
     const formData = new  FormData();
-    formData.append("productType",productData.productType);
-    formData.append("productPrice",productData.productPrice);
-    formData.append("photo",productData.photo);
+    formData.append("productType",product.productType);
+    formData.append("productPrice",product.productPrice);
+    formData.append("photo",productphoto);
 
     const response = await api.put(`/products/update/${productId}`,formData)
     return response

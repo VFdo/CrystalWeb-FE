@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { getAllProducts, deleteProducts } from '../utils/ApiFunctions';
+import { getAllProducts, deleteProduct } from '../utils/ApiFunctions';
 import ProductFilter from '../common/ProductFilter';
 import ProductPaginator from '../common/ProductPaginator';
 import { Col,Row } from 'react-bootstrap';
@@ -45,7 +45,7 @@ const handlePaginationClick = (pageNumber) =>{
 }
 const handleDelete = async(productId) =>{
     try{
-       const result=await deleteProducts(productId)
+       const result=await deleteProduct(productId)
        if(result === ""){
         setSuccessMessage(`Deleted Product with ID: ${productId}`)
         fetchProducts()
@@ -70,14 +70,18 @@ const indexofFirstProduct = indexofLastProduct - itemsPerPage
 const currentProducts = filteredProducts.slice(indexofFirstProduct, indexofLastProduct)
   return (
     <>
-    
+    <Row>
+        <h3 className='text-center mt-2'>
+            <span className='product-color'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
+        </h3>
+    </Row>
+    <hr />
+    {isLoading} ?(
+        <p>Loading Existing products</p>
+    ):(
+        <>
         <section className='mt-5 mb-5 container'>
-            <Row>
-            <h3 className='text-center mt-2'>
-              <span className='product-color'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
-            </h3>
-             </Row>
-             <hr />
+            
             <div className='d-flex justify-content-between mb-3 mt-5'>
                 <h2>Existing  Products </h2>
             </div>
@@ -133,6 +137,9 @@ const currentProducts = filteredProducts.slice(indexofFirstProduct, indexofLastP
             <hr />
         </section>
    
+        </>
+    )
+       
     </>
   )
 }

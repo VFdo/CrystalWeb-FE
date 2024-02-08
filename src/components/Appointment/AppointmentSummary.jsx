@@ -25,7 +25,7 @@ const AppointmentSummary = ({booking, isFormValid, onConfirm}) => {
   return (
     <div className='card card-body mt-5'>
         <h4>Appointment Summary</h4>
-
+        <p>Photo : <strong>{booking.photo}</strong></p>
         <p>Full Name : <strong>{booking.clientName}</strong></p>
         <p>Email : <strong>{booking.clientEmail}</strong></p>
         <p>Phone Number : <strong>{booking.phoneNumber}</strong></p>

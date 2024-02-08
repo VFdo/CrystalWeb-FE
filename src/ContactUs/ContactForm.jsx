@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-import { ContactUs } from '../components/utils/ApiFunctions'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import { Button, Container, Form ,Row,Col } from 'react-bootstrap'
-import ContactSummary from './ContactSummary'
+import { addContact } from '../components/utils/ApiFunctions'
+import { NavLink } from 'react-router-dom'
+import { Button, Container, Form ,Row } from 'react-bootstrap'
 import Header from '../components/common/Header'
 
 
 
 const ContactForm = () => {
-    const [isvalidated, setIsValidated] = useState(false)
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
     const [contacting, setContacting] = useState({
         clientName:"",
         phoneNumber: "",
@@ -23,41 +19,49 @@ const ContactForm = () => {
         emailAddress: "" ,
         message:""
     })
-    const {clientId} = useParams()
-    const navigate = useNavigate
+
+    const [successMessage,setSuccessMessage] = useState("")
+    const [errorMessage,setErrorMessage] = useState("")
+    
 
     const handleInputChange = (e)=>{
-        const {name, value} = e.target
-        setContacting({...contacting, [name]:value})
-        setErrorMessage("")
+        const name = e.target.name
+        let value = e.target.value
+        if(name === "message" ){
+          if(!isNaN(value)){
+          value.parseInt(value)
+      } else{
+        value = ""
+      }
+      }
+      setContacting({...contacting, [name]: value})
     }
 
-    const handleSubmit = (e)=>{
+    const handleSubmit =async(e) =>{
         e.preventDefault()
-        const form = e.currentTarget
-
-        if(form.checkValidity() === false ) {
-            e.stopPropagation()
-        }else{
-            setIsSubmitted(true)
-        }
-        setIsValidated(true)
-    }
-
-    const handleContacting = async()=>{
         try{
-            const confirmationCode = await ContactUs(clientId, contacting)
-            setIsSubmitted(true)
-            navigate("/message-sucess",{state:{message : confirmationCode}})
+          const success = await addContact(contacting.clientName, contacting.phoneNumber,
+                                                contacting.emailAddress,contacting.message); 
+          if(success !==undefined){
+            setSuccessMessage("A Message has been Sent")
+            setBooking({photo: null, clientName:"", phoneNumber:"",emailAddress:"",checkInDate:"",checkInTime:"",numberOfPets:""})
+            setImagePreview("")
+            setErrorMessage("")
+          }else{
+            setErrorMessage("Error Sending Message")
+          }
         }catch(error){
-            setErrorMessage(error.message)
-            navigate("/message-error",{state:{error : errorMessage}})
+          setErrorMessage(error.message)
         }
-    }
+        setTimeout(()=> {
+          setSuccessMessage("")
+          setErrorMessage("")
+        },3000)
+      }
     
   return (
     <>
-    <Container className='mb-2'>
+    <Container className='mb-5'>
         <Header title={"Contact Us"}/>
         <Row>
             <h4 className='text-center mt-2'>
@@ -67,12 +71,19 @@ const ContactForm = () => {
         </Row>
         <hr />
     </Container>
-    <div className='container contact mb-3 '>
+    <div className='container contact'>
         <div className='row'>
-            <div className='col-md-10'>
-                <div className='card card-body mt-2'>
+            <div className=' justify-content-center'>
+                <div className='card card-body mt-2 '>
                     <h4 className='product-color text-center'>Contact Us</h4>
-                    <Form noValidate validated={isvalidated} onSubmit={handleSubmit}>
+                    <div>
+                        {successMessage && (
+                            <div className='alert alert-sucess fade show'>{successMessage}</div>
+                        )}
+                        {errorMessage && (
+                            <div className='alert alert-danger fade show'>{errorMessage}</div>
+                        )}
+                    <Form  onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label htmlFor="clientName">Full Name : </Form.Label>
                         <Form.Control
@@ -146,22 +157,16 @@ const ContactForm = () => {
     
                         </div>
                     </Form>
+                    </div>
                 </div>
-            </div>
-            <div className='col-md-4'>
-                {isSubmitted &&(
-                    <ContactSummary
-                        contacting={contacting}
-                        isFormValid={isvalidated}
-                        onConfirm={handleContacting}
-                    />
-                )}
             </div>
 
         </div>
         
+        
     </div>
-    <Row xs={1} md={2} lg={3} className='g-2 mt-2'>
+    <div>
+    <Row xs={1} md={2} lg={3} className='g-1 '>
             <span className='product-color gap-2'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
             <p className='text-center'><strong>Providing Top-Notch Veterinary Care</strong></p>
             
@@ -173,6 +178,8 @@ const ContactForm = () => {
     
     </Row>
     <hr />
+    </div>
+   
 
     </>
     

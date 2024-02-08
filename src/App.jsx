@@ -14,6 +14,7 @@ import HospitalServices from "./components/common/HospitalServices";
 import ContactForm from "./ContactUs/ContactForm";
 import AboutUs from "./components/common/AboutUs";
 import ContactSucess from "./ContactUs/ContactSucess"
+import AppointmentForm from "./components/Appointment/AppointmentForm";
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
           <Route path="/existing-products" element={<ExistingProducts/>}/>
           <Route path="/add-product" element={<AddProduct/>}/>
           <Route path="/hospital-services" element={<HospitalServices/>}/>
-          <Route path="/book-appointment" element={<CheckOut/>}/>
+          <Route path="/book-appointment" element={<AppointmentForm/>}/>
           <Route path="/browse-all-products" element={<ProductListing/>}/>
           <Route path="/admin" element={<Admin/>}/>
           <Route path="/about-us" element={<AboutUs/>}/>

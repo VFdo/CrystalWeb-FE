@@ -4,33 +4,33 @@ import { Link, useParams } from 'react-router-dom';
 import ProductTypeSelector from '../common/ProductTypeSelector'
 
 const EditProduct = () => {
-    const [product, setProduct] = useState({
+    const [productData, setProductData] = useState({
         photo : null,
         productType:"",
         productPrice:"",
       })
     
       const [imagePreview, setImagePreview] = useState("")
-      const [successMessage,setSucessMessage] = useState("")
+      const [successMessage,setSuccessMessage] = useState("")
       const [errorMessage,setErrorMessage] = useState("")
 
       const{productId} = useParams()
 
       const handleImageChange=(e) =>{
         const selectedImage = e.target.files[0]
-        setProduct({...product, photo : selectedImage})
+        setProductData({...productData, photo : selectedImage})
         setImagePreview(URL.createObjectURL(selectedImage))
       }
 
       const handleInputChange = (event)=>{
         const {name,value} = event.target
-        setProduct({...product, [name]: value})
+        setProductData({...productData, [name]: value})
       }
       useEffect(()=>{
         const fetchProduct = async() =>{
             try{
                 const productData = await getProductbyID(productId)
-                setProduct(productData)
+                setProductData(productData)
                 setImagePreview(productData.photo)
             }catch(error){
                 console.error(error)
@@ -43,11 +43,11 @@ const EditProduct = () => {
       const handleSubmit =async(event) =>{
         event.preventDefault()
         try{
-          const response = await updateProduct(productId, product);
+          const response = await updateProduct(productId, productData);
           if(response.status === 200){
-            setSucessMessage("Product Updated Successfully")
+            setSuccessMessage("Product Updated Successfully")
             const updatedProductData = await getProductbyID(productId)
-            setProduct(updatedProductData)
+            setProductData(updatedProductData)
             setImagePreview(updatedProductData.photo)
             setErrorMessage("")
           }else{
@@ -59,7 +59,7 @@ const EditProduct = () => {
           setErrorMessage('Error updating product')
         }
         setTimeout(()=> {
-          setSucessMessage("")
+          setSuccessMessage("")
           setErrorMessage("")
         },3000)
       }
@@ -81,7 +81,7 @@ const EditProduct = () => {
                 <div className='mb-3'>
                   <label htmlFor="catergory" className="form-label">Catergory</label>
                   <div>
-                    <ProductTypeSelector handleProductInputChange={handleInputChange} product={product}/>
+                    <ProductTypeSelector handleProductInputChange={handleInputChange} product={productData}/>
                   </div>
                 </div>
                 <div className='mb-3'>
@@ -91,7 +91,7 @@ const EditProduct = () => {
                     className ="form-control"
                     id ="price"
                     name="price"
-                    value={product.productPrice}
+                    value={productData.productPrice}
                     onChange={handleInputChange}
                      />
                   

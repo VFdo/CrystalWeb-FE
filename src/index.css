@@ -424,7 +424,9 @@ body {
   }  
 
   .contact{
-    margin-left:70px;
+    width: 45rem;
+    height:45rem;
+    justify-content: center;
   }
 
   /*testimonials css here*/

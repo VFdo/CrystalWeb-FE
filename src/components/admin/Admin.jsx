@@ -24,6 +24,9 @@ const Admin = () => {
         <Button variant="outline-success "  >
           <Link to = {"/existing-products"} className='admin_link '>View or Delete Products</Link>
         </Button>
+        <Button variant="outline-success "  >
+          <Link to = {"/book-appointment"} className='admin_link '>Make Appointments</Link>
+        </Button>
 
         </div>
         <hr />

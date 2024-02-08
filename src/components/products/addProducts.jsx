@@ -7,7 +7,7 @@ import { Row ,Card,Button} from 'react-bootstrap'
 import Header from '../common/Header'
 
 const addProducts = () => {
-  const [newProduct, setNewProduct] = useState({
+  const [newProduct, setnewProduct] = useState({
     photo : null,
     productType:"",
     productPrice:"",
@@ -27,29 +27,29 @@ const addProducts = () => {
     value = ""
   }
   }
-  setNewProduct({...newProduct, [name]: value})
+  setnewProduct({...newProduct, [name]: value})
   }
   
   const handleImageChange=(e) =>{
     const selectedImage = e.target.files[0]
-    setNewProduct({...newProduct, photo : selectedImage})
+    setnewProduct({...newProduct, photo : selectedImage})
     setImagePreview(URL.createObjectURL(selectedImage))
   }
 
   const handleSubmit =async(e) =>{
     e.preventDefault()
     try{
-      const sucess = await addProduct(newProduct.photo,newProduct.productType, newProduct.productPrice);
-      if(sucess !==undefined){
+      const success = await addProduct(newProduct.photo,newProduct.productType, newProduct.productPrice);
+      if(success !==undefined){
         setSuccessMessage("A new Product was added to the list")
-        setNewProduct({photo: null, productType:"", productPrice:""})
+        setnewProduct({photo: null, productType:"", productPrice:""})
         setImagePreview("")
         setErrorMessage("")
       }else{
         setErrorMessage("Error Adding a Product")
       }
     }catch(error){
-      setErrorMessage(error.response.data.message)
+      setErrorMessage(error.message)
     }
     setTimeout(()=> {
       setSuccessMessage("")
@@ -71,12 +71,11 @@ const addProducts = () => {
         <hr />
       
       <div className='row justify-content-center'>
-        <Card  style={{ width: "80vh", height:'38rem'}}>
+      <Card  style={{ width: "30rem", height:'25rem'}}>
           <Card.Body>
             <Card.Title className='product-color text-center'>
               Add New Product
             </Card.Title>
-          
             <Card.Text >
             <div >
               {successMessage && (
@@ -84,11 +83,11 @@ const addProducts = () => {
               )}
               {errorMessage && (
                 <div className='alert alert-danger fade show'>{errorMessage}</div>
-              )} 
-                
+              )}
+
               <form onSubmit={handleSubmit} >
                 <div className='mb-3'>
-                  <label htmlFor="catergory" className="form-label logo-text">Catergory</label>
+                  <label htmlFor="productType" className="form-label logo-text">Catergory</label>
                   <div>
                     <ProductTypeSelector handleProductInputChange={handleProductInputChange} newProduct={newProduct}/>
                   </div>
@@ -100,7 +99,6 @@ const addProducts = () => {
                     className ="form-control"
                     id ="productPrice"
                     name="productPrice"
-                    type='number'
                     value={newProduct.productPrice}
                     onChange={handleProductInputChange}
                     />
