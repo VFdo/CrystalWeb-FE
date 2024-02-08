@@ -1,15 +1,15 @@
 import axios  from 'axios';
 
 export const api  = axios.create({
-    baseURL : "http://localhost:8080"
+    baseURL : ""
 })
 
-export async function addProduct(photo,price,catergory){
+export async function addProduct(photo,productPrice,productType){
     const formData = new  FormData();
 
     formData.append("photo",photo)
-    formData.append("price",price)
-    formData.append("catergory",catergory)
+    formData.append("productPrice",productPrice)
+    formData.append("productType",productType)
     
 
     const response = await api.post("/products/add/new-product",formData)
@@ -36,11 +36,11 @@ export async  function getAllProducts() {
         const result = await api.get("/products/all-products");
         return result.data
     }catch(error){
-        throw new Error ("Error fetching rooms")
+        throw new Error ("Error fetching products")
     }
 }
 /*This function delete product by Id */
-export async function deleteProducts(productId){
+export async function deleteProduct(productId){
     try{
         const result = await api.delete(`/products/delete/product/${productId}`);
         return result.data
@@ -52,8 +52,8 @@ export async function deleteProducts(productId){
 /*This function update product by Id */
 export async function updateProduct(productId, productData){
     const formData = new  FormData();
-    formData.append("catergory",productData.catergory);
-    formData.append("price",productData.Price);
+    formData.append("productType",productData.productType);
+    formData.append("productPrice",productData.productPrice);
     formData.append("photo",productData.photo);
 
     const response = await api.put(`/products/update/${productId}`,formData)

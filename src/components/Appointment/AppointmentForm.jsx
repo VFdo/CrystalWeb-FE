@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { bookAppointment } from '../utils/ApiFunctions'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Form, FormControl } from 'react-bootstrap'
+import { Form} from 'react-bootstrap'
 import AppointmentSummary from './AppointmentSummary'
 
 const AppointmentForm = () => {
@@ -14,9 +14,7 @@ const AppointmentForm = () => {
         emailAddress: "" ,
         checkInDate:"",
         checkInTime:"", 
-        serviceType: "",
         numberOfPets:"",
-        additionalInfo:""
     })
     const [appointmentInfo, setAppointmentInfo] = useState({
         clientName:"",
@@ -24,9 +22,7 @@ const AppointmentForm = () => {
         emailAddress: "" ,
         checkInDate:"",
         checkInTime:"", 
-        serviceType: "",
         numberOfPets:"",
-        additionalInfo:""
     })
     const {appointmentID} = useParams()
     const navigate = useNavigate
@@ -74,10 +70,10 @@ const AppointmentForm = () => {
             <div className='col-md-6'>
                 <div className='card card-body mt-5'>
                     <h4 className='card card-title'>Book An Appointment</h4>
-                    <Form noValidate validated={isvalidated} onSubmit={handleSubmit}>
+                    <Form noValidated validated={isvalidated} onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label htmlFor="clientName">Full Name : </Form.Label>
-                        <FormControl
+                        <Form.Control
                             required
                             type='text'
                             id='clientName'
@@ -93,7 +89,7 @@ const AppointmentForm = () => {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label htmlFor="clientEmail">Email Address : </Form.Label>
-                            <FormControl
+                            <Form.Control
                                 required
                                 type='email'
                                 id='clientEmail'
@@ -108,8 +104,8 @@ const AppointmentForm = () => {
                             </Form.Control.Feedback> 
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label htmlFor="clientEmail">Phone Number : </Form.Label>
-                            <FormControl
+                            <Form.Label htmlFor="phoneNumber">Phone Number : </Form.Label>
+                            <Form.Control
                                 required
                                 type='number'
                                 id='phoneNumber'
@@ -129,7 +125,7 @@ const AppointmentForm = () => {
                             <div className='row'>
                                 <div className='col-6'>
                                     <Form.Label htmlFor="checkInDate">Check-In Date : </Form.Label>
-                                    <FormControl
+                                    <Form.Control
                                         required
                                         type='date'
                                         id='checkInDate'
@@ -147,7 +143,7 @@ const AppointmentForm = () => {
 
                                 <div className='col-6'>
                                     <Form.Label htmlFor="checkInTime">Check-In Time : </Form.Label>
-                                    <FormControl
+                                    <Form.Control
                                         required
                                         type='time'
                                         id='checkInTime'
@@ -170,15 +166,16 @@ const AppointmentForm = () => {
                             <div className='row'>
                                 <div className='col-6'>
                                     <Form.Label htmlFor="numberOfPets">Number of Pets : </Form.Label>
-                                    <FormControl
+                                    <Form.Control
                                         required
                                         type='number'
                                         id='numberOfPets'
                                         name='numberOfPets'
                                         value={booking.numberOfPets}
                                         min={1}
-                                        aria-placeholder='0'
+                                        placeholder='0'
                                         onChange={handleInputChange}
+                                        
                                     />
 
                                     <Form.Control.Feedback type='invalid'> 

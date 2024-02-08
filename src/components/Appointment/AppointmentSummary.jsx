@@ -32,8 +32,6 @@ const AppointmentSummary = ({booking, isFormValid, onConfirm}) => {
         <p>Check In Date : <strong>{moment(booking.checkInDate).format('DD/MM/YYYY')}</strong></p>
         <p>Check In Time: <strong>{moment(booking.checkInTime).format('HH:mm A')} </strong></p>
         <p>Number of Pets : <strong>{booking.numberOfPets}</strong></p>
-        <p>Service Type : <strong>{booking.serviceType}</strong></p>
-        <p>Additional Info : <strong>{booking.additionalInfo}</strong></p>
     </div>
 
     

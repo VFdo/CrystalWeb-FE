@@ -19,8 +19,8 @@ const ProductCard = ({product}) => {
                     
                 </div>
                 <div className='flex-grow-1 ml-3 px-5'>
-                    <Card.Title className='product-color'>{product.catergory}</Card.Title>
-                    <Card.Title className='product-price'>{product.price}</Card.Title>
+                    <Card.Title className='product-color'>{product.productType}</Card.Title>
+                    <Card.Title className='product-price'>{product.productPrice}</Card.Title>
                     <Card.Text>{product.description}</Card.Text>
                 </div>
                 <div className='flex-shrink-0 mt-3'>

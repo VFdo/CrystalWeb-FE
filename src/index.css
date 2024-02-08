@@ -3,16 +3,64 @@ body {
     padding: 0;
     margin: 0;
   }
+  .link{
+    text-decoration: none;
+    
+  }
+  .admin_link{
+    text-decoration: none;
+    color: #166d1f;;
+  }
+  .admin_link:hover{
+    color: #fff;
+  }
+  .logo {
+    height: 40px;
+    width: 40px;
+    margin-bottom: 5px;
+  }
+  .logo-text{
+    color:  #124C5F;
+    font-weight: 700;
+    padding-left: 0.3em;
+  }
+  .logo-text2{
+    border: none;
+    color: #25A131;
+    display: block;
+    font-size: 0.5em;
+    padding-left: 0.3em;
+  }
   .card {
     opacity: 0.9;
   }
+  .card:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(47, 161, 59, 0.5), 0 0 20px rgb(47, 161, 59) !important;
+  }
+  .home_card{
+    padding-top: 22rem;
+    padding-bottom: 10rem;
+    transition: 0.5s ease;
+    
+  }
+  
   
   /* Navigation bar definitions */
    .navbar{
     padding: 0;
    }
+   .home{
+    background-color: #25A131 ;
+    color: #fff;
+   }
+   .home:hover{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+   }
    .navbar .navbar-nav .nav-link{
     padding: 1em;
+    justify-content: center;
    }
    .navbar .navbar-nav .nav-item{
     position: relative;
@@ -69,9 +117,10 @@ body {
   
     .product-color{
       color: rgb(36, 202, 72);
+      text-decoration: none;
     }
     .product-price{
-      color:rgb(11, 129, 184);
+      color:rgb(28, 211, 98);
       font-family: 'Courier New', Courier, monospace;
       font-size:medium;
     }
@@ -88,18 +137,20 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50vh;
+    height: 40vh;
   }
   
   .header {
     position: relative;
-    height: 150px;
+    height: 130px;
     background-size: cover;
     background-image: url("./assets/petshopbackground.jpg");
     background-position: center center;
+    opacity: 0.8;
+    
   }
   .header-title {
-    color: #fff;
+    color: #096409;
     font-size: 4rem;
     align-content: center;
   }
@@ -177,7 +228,6 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
     }
     .overlay-content {
       position: absolute;
@@ -194,14 +244,17 @@ body {
      background-size: cover;
     background-position: center;
      position: relative;
-    height: 80vh;
+    height: 100%;
+    
    }
   
   .header-banner {
     position: relative;
     height: 500px;
   }
-  
+  .about{
+    margin-left: 20px;
+  }
   @media only screen and (max-width: 768px) {
     .header-banner h1 {
       font-size: 20px;
@@ -214,16 +267,166 @@ body {
     }
   }
   
-   .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #f5f5f5;
-    height: 60px;
+  
+  
+  /*counter animation css**/
+  .container{
+    margin-top:60px;
+    
+  }
+
+  .counter-box {
+    display: block;
+    padding: 10px 10px 10px;
     text-align: center;
+    border: 2px solid #39a143;
+    border-radius:20px;
+    background-color: #25A131;
+  }
+
+  .counter-box p {
+    margin: 5px 0 0;
+    padding: 0;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500
+  }
+
+  .counter-box i {
+    font-size: 40px;
+    margin: 0 0 15px;
+    color: #ffffff;
+
+  }
+
+  .counter { 
+    display: block;
+    font-size: 25px;
+    font-weight: 700;
+    color:#f3fff4;
+    line-height: 28px
+  }
+
+  .counter-box.colored {
+        background:#25A131;
+  }
+
+  .counter-box.colored p,
+  .counter-box.colored i,
+  .counter-box.colored .counter {
+    color: #fff
+  }
+  .counter_row{
+    margin-left: 150px;
+  }
+
+  /*footer css start here*/
+  .required:after {
+    content: " *";
+    color: red;
   }
   
+  .google-maps {
+    position: relative;
+    padding-bottom: 75%;
+    height: 0;
+    overflow: hidden;
+  }
   
+  .google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
   
+  .bg-facebook {
+    background-color: #2ba51b;
+  }
+  
+  .bg-twitter {
+    background-color: #85fc67;
+  }
+  
+  .bg-google {
+    background-color: #3550ea;
+  }
+  
+  .bg-instagram {
+    background-color: #3774cf;
+  }
+  
+  .bs-cover {
+    background-size: cover;
+  }
+  
+  .r-0 {
+    right: 0;
+  }
+  
+  .mw-180 {
+    max-width: 180px;
+  }
+  
+  .mw-140 {
+    max-width: 140px;
+  }
+  
+  .i-va {
+    vertical-align: -0.125em;
+  }
+  
+  .breadcrumb {
+    padding: 0.5rem 1rem;
+    background-color: #e9ecef;
+  }
+  
+  .accordion-icon-button {
+    display: flex;
+    border-radius: inherit;
+  }
+  
+  .accordion-icon-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'%23%7B%24accordion-icon-color%7D'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M1.646%204.646a.5.5%200%200%201%20.708%200L8%2010.293l5.646-5.647a.5.5%200%200%201%20.708.708l-6%206a.5.5%200%200%201-.708%200l-6-6a.5.5%200%200%201%200-.708z'%2F%3E%3C%2Fsvg%3E");
+    transform: rotate(-180deg);
+    background-position-y: center;
+  }
+  
+  .accordion-icon-button::after {
+    flex-shrink: 0;
+    background-position-y: center;
+    width: 20px;
+    margin-left: auto;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'%23%7B%24accordion-icon-active-color%7D'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M1.646%204.646a.5.5%200%200%201%20.708%200L8%2010.293l5.646-5.647a.5.5%200%200%201%20.708.708l-6%206a.5.5%200%200%201-.708%200l-6-6a.5.5%200%200%201%200-.708z'%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: transform .2s ease-in-out;
+  }
+  
+  .accordion-icon-button.collapsed {
+    border-bottom: none;
+  }
+
+  .footer_row{
+    margin-right: 45px;
+  }
+  
+
+  footer {
+    padding: -10rem;
+    width: 100%;
+    background-color: #f5f5f5;
+    margin-left: 0;
+    position: relative;
+    margin-right: 0;
+  }  
+
+  .contact{
+    margin-left:70px;
+  }
+
+  /*testimonials css here*/
+
   

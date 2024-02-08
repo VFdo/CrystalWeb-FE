@@ -7,12 +7,13 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Home from "./components/Home/homepage"
 import EditProduct from "./components/products/EditProduct";
 import  NavBar from './components/layout/NavBar';
-import Footer from './components/layout/Footer'
 import ProductListing from "./components/products/ProductListing";
 import Admin from "./components/admin/Admin";
 import CheckOut from "./components/common/CheckOut";
 import HospitalServices from "./components/common/HospitalServices";
 import ContactForm from "./ContactUs/ContactForm";
+import AboutUs from "./components/common/AboutUs";
+import ContactSucess from "./ContactUs/ContactSucess"
 
 
 function App() {
@@ -31,7 +32,11 @@ function App() {
           <Route path="/book-appointment" element={<CheckOut/>}/>
           <Route path="/browse-all-products" element={<ProductListing/>}/>
           <Route path="/admin" element={<Admin/>}/>
-          <Route path="/appointment-form" element={<ContactForm/>}/>
+          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/contact-form" element={<ContactForm/>}/>
+          <Route path="/message-success" element={<ContactSucess/>}/>
+
+          
         </Routes>
       </Router>
     </main>

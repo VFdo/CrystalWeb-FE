@@ -6,8 +6,8 @@ import ProductTypeSelector from '../common/ProductTypeSelector'
 const EditProduct = () => {
     const [product, setProduct] = useState({
         photo : null,
-        catergory:"",
-        price:"",
+        productType:"",
+        productPrice:"",
       })
     
       const [imagePreview, setImagePreview] = useState("")
@@ -91,7 +91,7 @@ const EditProduct = () => {
                     className ="form-control"
                     id ="price"
                     name="price"
-                    value={product.price}
+                    value={product.productPrice}
                     onChange={handleInputChange}
                      />
                   

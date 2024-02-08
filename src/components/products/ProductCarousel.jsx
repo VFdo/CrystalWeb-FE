@@ -4,7 +4,7 @@ import { Card, Carousel, Col, Container, Row } from 'react-bootstrap'
 
 const ProductCarousel = () => {
 
-    const [product, setProducts] = useState([{Id:",productType",price:"", photo: ""}]) //default state for product array. 
+    const [product, setProducts] = useState([{Id:"",productType:"",price:"", photo: ""}]) //default state for product array. 
     const [errorMessage, setErrorMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 

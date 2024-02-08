@@ -1,6 +1,8 @@
 import React ,{useState}from 'react'
 import { NavLink } from 'react-router-dom'
 import {Link} from 'react-router-dom'
+import Logo from '../../assets/logo.png'
+import { Button } from 'react-bootstrap'
 
 const NavBar = () => {
     const [showAccount, setShowAccount] = useState(false)
@@ -9,10 +11,11 @@ const NavBar = () => {
         setShowAccount(!showAccount)
     }
   return (
-    <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top'>
+    <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top '>
         <div className='container-fluid'>
-            <Link to={"/"}>
-                <span className='product-color'>Crystal Animal Hospital</span>
+            <img src={Logo} alt="logo here" className='logo'/>
+            <Link to={"/"} className='link'>
+                <h4 className='logo-text'>CRYSTAL<br /><span className='logo-text2'> Animal Hospital</span></h4>
             </Link>
             <button
                 className='navbar-toggler'
@@ -24,22 +27,25 @@ const NavBar = () => {
                 aria-label='Toggle navigation'>
                 <span className='navbar-toggler-icon'></span>
             </button>
-            <div className='collapse navbar-collapse' id='navbarScroll'>
+            <div className='collapse navbar-collapse ' id='navbarScroll'>
                 <ul className='navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll'>
                     <li className='nav-item'>
                         <NavLink className='nav-link' aria-current='page' to={"/"}>Home</NavLink>
                     </li>
                     <li className='nav-item'>
-                        <NavLink className='nav-link' aria-current='page' to={"/browse-all-products"}>About Us</NavLink>
+                        <NavLink className='nav-link' aria-current='page' to={"/about-us"}>About Us</NavLink>
                     </li>
                     <li className='nav-item'>
                         <NavLink className='nav-link' aria-current='page' to={"/hospital-services"}>Services</NavLink>
                     </li>
                     <li className='nav-item'>
-                        <NavLink className='nav-link' aria-current='page' to={"/browse-all-products"}>Shop</NavLink>
+                        <NavLink className='nav-link' aria-current='page' to={"/products/product/types"}>Shop</NavLink>
                     </li>
                     <li className='nav-item'>
-                        <NavLink className='nav-link' aria-current='page' to={"/appointment-form"}>Contact</NavLink>
+                        <NavLink className='nav-link' aria-current='page' to={"/contact-form"}>Contact</NavLink>
+                    </li>
+                    <li className='nav-item'>
+                        <NavLink className='nav-link' aria-current='page' to={"/testimonials"}>Testimonials</NavLink>
                     </li>
                     <li className='nav-item'>
                         <NavLink className='nav-link' aria-current='page' to={"/admin"}>Admin</NavLink>
@@ -48,8 +54,10 @@ const NavBar = () => {
 
                 <ul className ='d-flex navbar-nav'>
                     <li className='nav-item'>
-                        <NavLink className='nav-link' to={"/find-product"}>
-                            Find my Product
+                        <NavLink className='nav-link' to={"/appointment-form"}>
+                        <Button variant="outline-success" className='login'>
+                            Make An Appointment
+                        </Button>
                         </NavLink>
                     </li>
                     <li className='nav-item dropdown'>

@@ -34,7 +34,7 @@ const fetchProducts = async() =>{
         if(selectedProductType===""){
             setFilteredProducts(products)
         }else{
-            const filtered = products.filter((product)=> product.type === selectedProductType )
+            const filtered = products.filter((product)=> product.productType === selectedProductType )
             setFilteredProducts(filtered)
         }
         setCurrentPage(1)
@@ -72,6 +72,12 @@ const currentProducts = filteredProducts.slice(indexofFirstProduct, indexofLastP
     <>
     
         <section className='mt-5 mb-5 container'>
+            <Row>
+            <h3 className='text-center mt-2'>
+              <span className='product-color'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
+            </h3>
+             </Row>
+             <hr />
             <div className='d-flex justify-content-between mb-3 mt-5'>
                 <h2>Existing  Products </h2>
             </div>
@@ -101,8 +107,8 @@ const currentProducts = filteredProducts.slice(indexofFirstProduct, indexofLastP
                    {currentProducts.map((product)=>(
                     <tr key={product.id} className='text-center' >
                         <td>{product.id}</td>
-                        <td>{product.catergory}</td>
-                        <td>{product.price}</td>
+                        <td>{product.productType}</td>
+                        <td>{product.productPrice}</td>
                         <td className='gap-2'>
                             <Link to ={`/edit-products/${product.id}`}>View/Edit
                                 <span className='btn btn-info btn-sm'><FaEye/></span>
@@ -124,7 +130,7 @@ const currentProducts = filteredProducts.slice(indexofFirstProduct, indexofLastP
                 totalPages = {calculateTotalPages(filteredProducts,itemsPerPage,products)}
                 onPageChange = {handlePaginationClick}
             />
-
+            <hr />
         </section>
    
     </>
