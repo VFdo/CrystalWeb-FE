@@ -18,7 +18,7 @@ export default function AdminView() {
         </TabsList>
         <TabPanel value={1}>Employee Table</TabPanel>
         <TabPanel value={2}>Attendance Table</TabPanel>
-        <TabPanel value={3}>ThTaskird Table</TabPanel>
+        <TabPanel value={3}>Task Table</TabPanel>
         <TabPanel value={4}>Payroll Table</TabPanel>
       </Tabs>
     </div>

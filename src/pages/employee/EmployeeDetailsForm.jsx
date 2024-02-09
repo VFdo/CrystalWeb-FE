@@ -1,14 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-import { Typography } from "@mui/material";
-import { Button } from "@mui/material";
-import { Modal } from "@mui/material";
-import { TextField } from "@mui/material";
-import { FormControl, FormLabel } from "@mui/material";
-import { Stack } from "@mui/material";
-import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
-
+import { Button, Modal, TextField, Stack, FormControl, FormLabel, Typography } from "@mui/material";
 
 const styles = {
   modalBox: {
@@ -17,7 +8,8 @@ const styles = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 800,
-    bgcolor: "background.paper",
+    height : 800,
+    bgcolor: "#ffffff",
     border: "2px solid #000",
     boxShadow: 24,
     p: 5,
@@ -26,186 +18,161 @@ const styles = {
     textAlign: "center",
   },
   formControl: {
-    gap: 30,
+    gap: 50,
   },
 };
 
 const EmployeeForm = ({ employeeData, onClose, onChange, onSave }) => {
-  const handleNameChange = (event) => {
-    onChange({ ...employeeData, name: event.target.value });
+  const handleChange = (field, value) => {
+    onChange({ ...employeeData, [field]: value });
   };
-  const handleNICChange = (event) => {
-    onChange({ ...employeeData, nic: event.target.value });
-  };
-  const handleEmailChange = (event) => {
-    onChange({ ...employeeData, email: event.target.value });
-  };
-  const handleAgeChange = (event) => {
-    onChange({ ...employeeData, age: event.target.value });
-  };
-  const handleGenderChange = (event) => {
-    onChange({ ...employeeData, gender: event.target.value });
-  };
-  const handleBasicSalaryChange = (event) => {
-    onChange({ ...employeeData, basicSalary: event.target.value });
-  };
-  const handleContactNoChange = (event) => {
-    onChange({ ...employeeData, contactNo: event.target.value });
-  };
-  const handleAddressChange = (event) => {
-    onChange({ ...employeeData, address: event.target.value });
-  };
-  const handleCoreSkillsChange = (event) => {
-    onChange({ ...employeeData, skills: event.target.value });
+
+  const handleSave = () => {
+    onSave();
+    onClose();
   };
 
   return (
-    <Box sx={styles.modalBox}>
+    <Modal open={true} onClose={onClose} sx={styles.modalBox} hideBackdrop>
       <div style={styles.formContainer}>
-        <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
-          Enter Employee Details
-        </Typography>
+        <Typography variant="h4">Enter Employee Details</Typography>
         <FormControl style={styles.formControl}>
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Name</FormLabel>
-            <TextField value={employeeData.name} onChange={handleNameChange} />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>NIC</FormLabel>
-            <TextField value={employeeData.nic} onChange={handleNICChange} />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Email</FormLabel>
-            <input type="email"
-              value={employeeData.email}
-              onChange={handleEmailChange}
-            />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Age</FormLabel>
-            <input type="number"
-              value={employeeData.age}
-              onChange={handleAgeChange}
-            />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Gender</FormLabel>
-            <input type="radio"
-              value={employeeData.gender}
-              onChange={handleGenderChange} 
-              checked
-            /> Male
-            <input type="radio"
-              value={employeeData.gender}
-              onChange={handleGenderChange} 
-            /> Female
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Basic Salary</FormLabel>
-            <input type="number" 
-              value={employeeData.basicSalary}
-              onChange={handleBasicSalaryChange}
-            />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Contact No</FormLabel>
-            <input type="number" 
-              value={employeeData.contactNo}
-              onChange={handleContactNoChange}
-            />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Address</FormLabel>
-            <TextField
-              multiline
-              maxRows={4}
-              value={employeeData.address}
-              onChange={handleAddressChange}
-            />
-          </Stack>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 5 }}
-          >
-            <FormLabel sx={{ minWidth: 100 }}>Core Skills</FormLabel>
-            <TextField
-              multiline
-              maxRows={5}
-              value={employeeData.skills}
-              onChange={handleCoreSkillsChange}
-            />
-          </Stack>
-
-          <br></br>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 5, sm: 5, md: 12 }}
-            justifyContent="center"
-          >
-            <Button variant="outlined" onClick={onClose}>
-              Cancel
-            </Button>
-
-            <Button variant="contained" onClick={onSave}>
-              Save
-            </Button>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Name</FormLabel>
+            <TextField value={employeeData.employeeName} onChange={(e) => handleChange("employeeName", e.target.value)} />
           </Stack>
         </FormControl>
+
+        <br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>NIC</FormLabel>
+            <TextField value={employeeData.employeeNIC} onChange={(e) => handleChange("employeeNIC", e.target.value)} />
+          </Stack>
+        </FormControl> <br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Email</FormLabel>
+            <TextField value={employeeData.employeeEmail} onChange={(e) => handleChange("employeeEmail", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Role</FormLabel>
+            <TextField value={employeeData.employeeRoleId} onChange={(e) => handleChange("employeeRoleId", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+        <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}
+          >
+            <FormLabel>Date of Birth</FormLabel>
+            <TextField type="date" value={employeeData.employeeDob} onChange={(e) => handleChange("employeeDob", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+        <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}
+          >
+            <FormLabel>Gender</FormLabel>
+            <Stack direction="row" spacing={1}>
+            <input type="radio"
+              value={employeeData.employeeGender} onChange={(e) => handleChange("employeeGender", "Male")} /> Male
+            <input type="radio"
+              value={employeeData.employeeGender} onChange={(e) => handleChange("employeeGender", "Female")} /> Female
+            </Stack>
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Basic Salary</FormLabel>
+            <TextField type="number" value={employeeData.employeeBasicSalary} onChange={(e) => handleChange("employeeBasicSalary", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Hourly Pay</FormLabel>
+            <TextField type="number" value={employeeData.employeeHourlyPay} onChange={(e) => handleChange("employeeHourlyPay", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Required Daily Hours</FormLabel>
+            <TextField type="number" value={employeeData.employeeRequiredDailyHours} onChange={(e) => handleChange("employeeRequiredDailyHours", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Phone List</FormLabel>
+            <TextField value={employeeData.employeePhoneList ? employeeData.employeePhoneList.join(",") : ""} onChange={(e) => handleChange("employeePhoneList", e.target.value.split(","))} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Address</FormLabel>
+            <TextField multiline maxRows={4} value={employeeData.employeeAddress} onChange={(e) => handleChange("employeeAddress", e.target.value)} />
+          </Stack>
+        </FormControl><br/>
+
+        <FormControl>
+          <Stack direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 5 }}>
+            <FormLabel>Core Skills</FormLabel>
+            <TextField multiline maxRows={4} value={employeeData.employeeSkillList ? employeeData.employeeSkillList.join(",") : ""} onChange={(e) => handleChange("employeeSkillList", e.target.value.split(","))} />
+          </Stack>
+        </FormControl><br/>
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 5, sm: 5, md: 12 }} justifyContent="center">
+          <Button variant="outlined" onClick={onClose}>Cancel</Button>
+          <Button variant="contained" onClick={handleSave}>Save</Button>
+        </Stack>
       </div>
-    </Box>
+    </Modal>
   );
 };
 
 const EmployeeDetailsForm = () => {
   const [data, setData] = useState({
-    name: "",
-    nic: "",
-    email: "",
-    age: "",
-    gender: "",
-    basicSalary: "",
-    contactNo: "",
-    address: "",
-    skills: "",
+    employeeName: "",
+    employeeNIC : "",
+    employeeRoleId : "",
+    employeeDob :"",
+    employeeGender :"",
+    employeePhoneList :[],
+    employeeEmail :"",
+    employeeAddress :"",
+    employeeBasicSalary :0.00,
+    employeeHourlyPay :0.00,
+    employeeRequiredDailyHours :0,
+    employeeSkillList :[]
   });
+  
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     console.log("Fetching data...");
-    fetch("http://localhost:8080/employee/d4c9b823-928a-453b-8163-5184843625cb")
+    fetch("http://localhost:8080/employee/ca406b63-896b-4574-a1a5-9a82e0482ec8")
       .then((res) => res.json())
       .then((fetchedData) => {
         console.log("Data received:", fetchedData);
@@ -220,8 +187,8 @@ const EmployeeDetailsForm = () => {
   const handleClose = () => setOpen(false);
 
   const handleSave = () => {
-    console.log("saving...", data);
-    fetch("http://localhost:8080/pet/d4c9b823-928a-453b-8163-5184843625cb", {
+    console.log("Saving...", data);
+    fetch("http://localhost:8080/employee/ca406b63-896b-4574-a1a5-9a82e0482ec8", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -244,10 +211,10 @@ const EmployeeDetailsForm = () => {
         aria-describedby="modal-modal-description"
       >
         <EmployeeForm
-          employeeData={data}
-          onClose={handleClose}
-          onChange={setData}
-          onSave={handleSave}
+           employeeData={data}
+           onClose={handleClose}
+           onChange={setData}
+           onSave={handleSave}
         />
       </Modal>
     </div>
