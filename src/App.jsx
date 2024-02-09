@@ -10,7 +10,6 @@ import ItemPage from './pages/ItemPage'
 import PetPage from './pages/pet/PetPage'
 import PetHistory from './pages/pet/PetHistory'
 import PetDetailsForm from './pages/pet/PetDetailsForm'
-import AppointmentDetailsForm from './pages/appointment/AppointmentDetailsForm'
 import AppointmentTable from './pages/appointment/AppointmentTable'
 import AppointmentPage from './pages/appointment/AppointmentPage'
 
