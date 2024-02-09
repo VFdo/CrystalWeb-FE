@@ -17,7 +17,7 @@ const AboutUs = () => {
         </Row>
         <hr />
         <Col>
-            <Row className='about gap-5'>
+            <Row className='about gap-4 mb-4'>
                 <Card  style={{ width: "80vh", height:'15rem'}} >
                     <Card.Body>
                         <Card.Title className='product-color text-center'>

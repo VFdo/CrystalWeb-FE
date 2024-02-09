@@ -122,8 +122,7 @@ const ContactForm = () => {
                                 required
                                 type='number'
                                 id='phoneNumber'
-                                name='phoneNumber'
-                                value={contacting.phoneNumber}                      
+                                name='phoneNumber'                 
                                 placeholder='Enter Your phone Number'
                                 onChange={handleInputChange}
                             />
@@ -141,7 +140,6 @@ const ContactForm = () => {
                                 type='text'
                                 id='message'
                                 name='message'
-                                value={contacting.message}
                                 placeholder='Enter Your Message'
                                 onChange={handleInputChange}
                             />
@@ -153,7 +151,7 @@ const ContactForm = () => {
 
 
                         <div className='form-group mt-2 mb-2 text-center'>
-                            <Button variant="outline-success" className='login mt-5 w-25 ' type='submit' >Submit</Button>
+                            <Button variant="outline-success" className='login mt-5 w-25 ' type='submit' onClick={handleSubmit} >Submit</Button>
     
                         </div>
                     </Form>

@@ -10,6 +10,12 @@ const NavBar = () => {
     const handleAccountClick = () => {
         setShowAccount(!showAccount)
     }
+
+    const [showAdmin, setshowAdmin] = useState(false)
+
+    const handleAdminClick = () => {
+        setshowAdmin(!showAdmin)
+    }
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top '>
         <div className='container-fluid'>
@@ -39,16 +45,38 @@ const NavBar = () => {
                         <NavLink className='nav-link' aria-current='page' to={"/hospital-services"}>Services</NavLink>
                     </li>
                     <li className='nav-item'>
-                        <NavLink className='nav-link' aria-current='page' to={"/products/product/types"}>Shop</NavLink>
+                        <NavLink className='nav-link' aria-current='page' to={"/products/all-products"}>Shop</NavLink>
                     </li>
                     <li className='nav-item'>
                         <NavLink className='nav-link' aria-current='page' to={"/contact-form"}>Contact</NavLink>
                     </li>
-                    <li className='nav-item'>
-                        <NavLink className='nav-link' aria-current='page' to={"/contact-form"}>Testimonials</NavLink>
-                    </li>
-                    <li className='nav-item'>
-                        <NavLink className='nav-link' aria-current='page' to={"/admin"}>Admin</NavLink>
+                    
+                    <li className='nav-item dropdown'>
+                        <a
+                            className={`nav-link dropdown-toggle ${showAdmin ? "show":""}`}
+                            href='#'
+                            role='button'
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            onClick={handleAdminClick}
+                        >{" "}Admin</a>
+                        <ul
+                            className={`dropdown-menu ${showAdmin ? "show":""}`}
+                            aria-labelledby='navbarDropdown'
+                        >
+                            <li>
+                                <Link to={"/add-product"} className="dropdown-item">Add Products</Link>
+                            </li>
+                            <li>
+                                <Link to={"/existing-products"} className="dropdown-item">View or Delete Products</Link>
+                            </li>
+                            <li>
+                                <Link to={"/book-appointment"} className="dropdown-item">Make Appointments</Link>
+                            </li>
+                            <li>
+                                <Link to={"/existing-appointments"} className="dropdown-item">View Appointments</Link>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 

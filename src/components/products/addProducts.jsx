@@ -71,7 +71,7 @@ const addProducts = () => {
         <hr />
       
       <div className='row justify-content-center'>
-      <Card  style={{ width: "30rem", height:'25rem'}}>
+      <Card  style={{ width: "30rem", height:'32rem'}}>
           <Card.Body>
             <Card.Title className='product-color text-center'>
               Add New Product
@@ -99,7 +99,6 @@ const addProducts = () => {
                     className ="form-control"
                     id ="productPrice"
                     name="productPrice"
-                    value={newProduct.productPrice}
                     onChange={handleProductInputChange}
                     />
                   
@@ -124,7 +123,7 @@ const addProducts = () => {
                       Back
                   </Button>
                   </NavLink>
-                  <Button variant="outline-success" className='login mt-5'>Save Product</Button>
+                  <Button variant="outline-success" className='login mt-5' onClick={handleSubmit}>Save Product</Button>
                 </div>
 
               </form>

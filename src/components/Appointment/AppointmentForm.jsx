@@ -15,6 +15,15 @@ const AppointmentForm = () => {
         checkInTime:"", 
         numberOfPets:"",
     })
+    const [bookingInfo, setBookingInfo] = useState({
+        photo : null,
+        clientName:"",
+        phoneNumber: "",
+        emailAddress: "" ,
+        checkInDate:"",
+        checkInTime:"", 
+        numberOfPets:"",
+    })
     const [imagePreview, setImagePreview] = useState("")
     const [successMessage,setSuccessMessage] = useState("")
     const [errorMessage,setErrorMessage] = useState("")

@@ -1,8 +1,16 @@
 import axios  from 'axios';
 
 export const api  = axios.create({
-    baseURL : ""
+    baseURL : "http://localhost:8080"
 })
+
+export const  getHeader = () => {
+    const token = localStorage.getItem("token")
+    return{
+        Autherization : `Bearer ${token}`,
+        "Content-Type" : "application/json"
+    }
+} 
 
 export async function addProduct(photo,productPrice,productType){
     const formData = new  FormData();
@@ -76,6 +84,15 @@ export async  function getAllProducts() {
         throw new Error ("Error fetching products")
     }
 }
+/*This function get all appointments*/
+export async  function getAllAppointments() {
+    try{
+        const result = await api.get("/appointments/all-appointments");
+        return result.data
+    }catch(error){
+        throw new Error ("Error fetching appointments")
+    }
+}
 /*This function delete product by Id */
 export async function deleteProduct(productId){
     try{
@@ -83,6 +100,15 @@ export async function deleteProduct(productId){
         return result.data
     }catch(error){
         throw new Error (`Error deleting the produt ${error.message}`)
+    }
+}
+/*This function delete product by Id */
+export async function deleteAppointment(appointmentId){
+    try{
+        const result = await api.delete(`/appointments/delete/appointment/${appointmentId}`);
+        return result.data
+    }catch(error){
+        throw new Error (`Error deleting the appointment ${error.message}`)
     }
 }
 
@@ -138,16 +164,6 @@ export async function ContactUs(clientId, contacting){
 }
 
 
-/*This function gets all the appointments*/
-export async function getAllAppointments(){
-    try{
-        const result = await api.get('/bookings/all-bookings')
-        return result.data
-    }catch(error){
-        throw new Error (`Error fetching booked Appointments :${error.message}`)
-    }
-}
-
 /*this function get booking by cofirmation code*/
 export async function getAppointmentByConfirmationCode(confirmationCode){
     try{
@@ -169,5 +185,41 @@ export async function cancelBooking(appointmentId){
         return result.data
     }catch(error){
         throw new Error(`Error cancel booking : ${error.message}`)        
+    }
+}
+
+export async function registration(registration){
+    try{
+        const response = await api.post( "/auth/register-user", registration ) 
+        return response.data
+    }catch(error){
+        if(error.response && error.response.data){
+            throw new Error(error.response.data)
+    }else{
+        throw new Error(`Error register User:${error.message}`)
+        }
+    }
+}
+
+export async function login(login){
+    try{
+        const response = await api.post( "/auth/login", login ) 
+        if(response.status >=200 && response.status < 300){
+            return response.data
+        }else{
+            return null
+        }
+    }catch(error){
+        console.error(error)
+        return null
+    }
+}
+
+export async function getUserProfile(userId, token){
+    try{
+        const response = await api.get(`users/profile/${userId}`, {headers: getHeader()})
+        return response.data
+    }catch(error){
+        throw error
     }
 }
