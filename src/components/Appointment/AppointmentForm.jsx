@@ -1,90 +1,138 @@
 import React, { useState } from 'react'
-import { bookAppointment } from '../utils/ApiFunctions'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Form, FormControl } from 'react-bootstrap'
-import AppointmentSummary from './AppointmentSummary'
+import { addAppointment } from '../utils/ApiFunctions'
+import { Form,Row,Card,Button} from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import Header from '../common/Header'
+
 
 const AppointmentForm = () => {
-    const [isvalidated, setIsValidated] = useState(false)
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
     const [booking, setBooking] = useState({
+        photo : null,
         clientName:"",
         phoneNumber: "",
         emailAddress: "" ,
         checkInDate:"",
         checkInTime:"", 
-        serviceType: "",
         numberOfPets:"",
-        additionalInfo:""
     })
-    const [appointmentInfo, setAppointmentInfo] = useState({
+    const [bookingInfo, setBookingInfo] = useState({
+        photo : null,
         clientName:"",
         phoneNumber: "",
         emailAddress: "" ,
         checkInDate:"",
         checkInTime:"", 
-        serviceType: "",
         numberOfPets:"",
-        additionalInfo:""
     })
-    const {appointmentID} = useParams()
-    const navigate = useNavigate
+    const [imagePreview, setImagePreview] = useState("")
+    const [successMessage,setSuccessMessage] = useState("")
+    const [errorMessage,setErrorMessage] = useState("")
 
-    const handleInputChange = (e)=>{
-        const {name, value} = e.target
-        setBooking({...booking, [name]:value})
-        setErrorMessage("")
+    const handleImageChange=(e) =>{
+        const selectedImage = e.target.files[0]
+        setBooking({...booking, photo : selectedImage})
+        setImagePreview(URL.createObjectURL(selectedImage))
     }
 
-    const isClientCountValid = ()=>{
-        const petCount = parseInt(booking.numberOfPets)
-        return petCount >=1 
+    const handleProductInputChange = (e)=>{
+        const name = e.target.name
+        let value = e.target.value
+        if(name === "numberOfPets" ){
+          if(!isNaN(value)){
+          value.parseInt(value)
+      } else{
+        value = ""
+      }
+      }
+      setBooking({...booking, [name]: value})
+      }
 
-    }
-
-    const handleSubmit = (e)=>{
+    
+    const handleSubmit =async(e) =>{
         e.preventDefault()
-        const form = e.currentTarget
-
-        if(form.checkValidity() === false || !isClientCountValid()) {
-            e.stopPropagation()
-        }else{
-            setIsSubmitted(true)
-        }
-        setIsValidated(true)
-    }
-
-    const handleBooking = async()=>{
         try{
-            const confirmationCode = await bookAppointment(appointmentID, booking)
-            setIsSubmitted(true)
-            navigate("/booking-sucess",{state:{message : confirmationCode}})
+          const success = await addAppointment(booking.photo,booking.clientName, booking.phoneNumber,
+                                                booking.emailAddress,booking.checkInDate,booking.checkInTime,
+                                                booking.numberOfPets);
+          if(success !==undefined){
+            setSuccessMessage("An Appointment has been Created")
+            setBooking({photo: null, clientName:"", phoneNumber:"",emailAddress:"",checkInDate:"",checkInTime:"",numberOfPets:""})
+            setImagePreview("")
+            setErrorMessage("")
+          }else{
+            setErrorMessage("Error Booking an Appointment")
+          }
         }catch(error){
-            setErrorMessage(error.message)
-            navigate("/booking-sucess",{state:{error : errorMessage}})
+          setErrorMessage(error.message)
         }
-    }
+        setTimeout(()=> {
+          setSuccessMessage("")
+          setErrorMessage("")
+        },3000)
+      }
     
   return (
     <>
 
     <div className='container mb-5 '>
-        <div className='row'>
-            <div className='col-md-6'>
-                <div className='card card-body mt-5'>
-                    <h4 className='card card-title'>Book An Appointment</h4>
-                    <Form noValidate validated={isvalidated} onSubmit={handleSubmit}>
+    <Header title={"Book An Appointment"} />
+    <hr />
+            <Row>
+              <h4 className='text-center'>
+                 <span className='product-color gap-2'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
+                  <span className='gap-2 '>
+                      <br /> Book An Appointment
+                  </span>
+              </h4>
+            </Row>
+        <hr />
+        
+        <div className='justify-content-center'>
+            
+            <div className=''>
+            <div className='row justify-content-center'>
+                <Card  style={{ width: "45rem", height:'45rem'}}>
+                    <Card.Body>
+                        <Card.Title className='product-color text-center'>
+                        Book An Appointment
+                        </Card.Title>
+                        <Card.Text >
+                        <div>
+                        {successMessage && (
+                            <div className='alert alert-sucess fade show'>{successMessage}</div>
+                        )}
+                        {errorMessage && (
+                            <div className='alert alert-danger fade show'>{errorMessage}</div>
+                        )}
+                        <Form  onSubmit={handleSubmit}>
                         <Form.Group>
-                            <Form.Label htmlFor="clientName">Full Name : </Form.Label>
-                        <FormControl
+                            <legend className='logo-text'>Client Details-:</legend>
+                            <Form.Label htmlFor="photo">Add Photo : </Form.Label>
+                        <Form.Control
+                            
+                            type='file'
+                            id='photo'
+                            name='photo'
+                            placeholder='Insert an Image of your Pet'
+                            onChange={handleImageChange}
+                        />
+                        {imagePreview && (<img src={imagePreview} alt='product photo' style={{maxWidth:"0", maxHeight:"0"}}
+                            className='mb-3'/>
+                        ) }
+                        <Form.Group>
+                        <Form.Control.Feedback type='invalid'> 
+                            Please Insert an Image
+                        </Form.Control.Feedback> 
+                        </Form.Group>
+                        <Form.Label htmlFor="clientName">Full Name : </Form.Label>
+                        <Form.Control
                             required
                             type='text'
                             id='clientName'
                             name='clientName'
                             value={booking.clientName}
                             placeholder='Enter Your Full Name'
-                            onChange={handleInputChange}
+                            onChange={handleProductInputChange}
                         />
 
                         <Form.Control.Feedback type='invalid'> 
@@ -92,15 +140,15 @@ const AppointmentForm = () => {
                         </Form.Control.Feedback> 
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label htmlFor="clientEmail">Email Address : </Form.Label>
-                            <FormControl
+                            <Form.Label htmlFor="clientEmail"> Email Address : </Form.Label>
+                            <Form.Control
                                 required
                                 type='email'
                                 id='clientEmail'
                                 name='clientEmail'
                                 value={booking.clientEmail}
                                 placeholder='Enter Your Full Email'
-                                onChange={handleInputChange}
+                                onChange={handleProductInputChange}
                             />
 
                             <Form.Control.Feedback type='invalid'> 
@@ -108,15 +156,14 @@ const AppointmentForm = () => {
                             </Form.Control.Feedback> 
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label htmlFor="clientEmail">Phone Number : </Form.Label>
-                            <FormControl
+                            <Form.Label htmlFor="phoneNumber">Phone Number : </Form.Label>
+                            <Form.Control
                                 required
                                 type='number'
                                 id='phoneNumber'
                                 name='phoneNumber'
-                                value={booking.phoneNumber}
                                 placeholder='Enter Your phone Number'
-                                onChange={handleInputChange}
+                                onChange={handleProductInputChange}
                             />
 
                             <Form.Control.Feedback type='invalid'> 
@@ -125,18 +172,17 @@ const AppointmentForm = () => {
                         </Form.Group>
 
                         <fieldset style={{border:"2px"}}>
-                            <legend>Appointment Date and Time</legend>
+                            <legend className='logo-text'>Appointment Date and Time-:</legend>
                             <div className='row'>
                                 <div className='col-6'>
                                     <Form.Label htmlFor="checkInDate">Check-In Date : </Form.Label>
-                                    <FormControl
+                                    <Form.Control
                                         required
                                         type='date'
                                         id='checkInDate'
                                         name='checkInDate'
-                                        value={booking.checkInDate}
                                         placeholder='Check In date'
-                                        onChange={handleInputChange}
+                                        onChange={handleProductInputChange}
                                     />
 
                                     <Form.Control.Feedback type='invalid'> 
@@ -147,14 +193,13 @@ const AppointmentForm = () => {
 
                                 <div className='col-6'>
                                     <Form.Label htmlFor="checkInTime">Check-In Time : </Form.Label>
-                                    <FormControl
+                                    <Form.Control
                                         required
                                         type='time'
                                         id='checkInTime'
                                         name='checkInTime'
-                                        value={booking.checkInTime}
                                         placeholder='Check In Time'
-                                        onChange={handleInputChange}
+                                        onChange={handleProductInputChange}
                                     />
 
                                     <Form.Control.Feedback type='invalid'> 
@@ -166,19 +211,19 @@ const AppointmentForm = () => {
                             </div>
                         </fieldset>
                         <fieldset>
-                            <legend>Number of Pets</legend>
+                            <legend className='logo-text'>Number of Pets-:</legend>
                             <div className='row'>
                                 <div className='col-6'>
                                     <Form.Label htmlFor="numberOfPets">Number of Pets : </Form.Label>
-                                    <FormControl
+                                    <Form.Control
                                         required
                                         type='number'
                                         id='numberOfPets'
                                         name='numberOfPets'
-                                        value={booking.numberOfPets}
                                         min={1}
-                                        aria-placeholder='0'
-                                        onChange={handleInputChange}
+                                        placeholder='0'
+                                        onChange={handleProductInputChange}
+                                        
                                     />
 
                                     <Form.Control.Feedback type='invalid'> 
@@ -188,22 +233,22 @@ const AppointmentForm = () => {
                                 </div>
                             </div>
                         </fieldset>
-                        <div className='form-group mt-2 mb-2'>
-                            <button type='submit' className='btn btn-product'>
-                                Continue
-                            </button>
-                        </div>
-                    </Form>
+                        <div className='d-grid d-md-flex gap-3 mt-3'>
+                  <NavLink className='nav-link mt-5' to={"/admin"}>
+                  <Button variant="outline-success" className='/'>
+                      Back
+                  </Button>
+                  </NavLink>
+                  <Button variant="outline-success" className='login mt-5' type='submit'>Book Appointment</Button>
                 </div>
-            </div>
-            <div className='col-md-4'>
-                {isSubmitted &&(
-                    <AppointmentSummary
-                        booking={booking}
-                        isFormValid={isvalidated}
-                        onConfirm={handleBooking}
-                    />
-                )}
+                        
+                    </Form>
+                    </div>
+                    </Card.Text >
+                    </Card.Body>
+                    </Card>
+                    
+                 </div >  
             </div>
 
         </div>

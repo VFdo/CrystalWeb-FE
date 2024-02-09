@@ -1,19 +1,27 @@
 import React from 'react'
 import Header from './Header'
 import { FaClock, FaUtensils, FaWifi } from 'react-icons/fa'
-import { Container, Row , Col } from 'react-bootstrap'
+import { Container, Row , Col,Button } from 'react-bootstrap'
 import { Card } from 'react-bootstrap'
+import { MdPets } from "react-icons/md";
+import { FaClinicMedical } from "react-icons/fa";
+import { GiHairStrands } from "react-icons/gi";
+import { MdVaccines } from "react-icons/md";
+import { FaHospital } from "react-icons/fa";
+import { TbDentalBroken } from "react-icons/tb";
+import { NavLink } from 'react-router-dom'
 
 const HospitalServices = () => {
   return (
     <>
-    <Container className='mb-2'>
+    <hr />
+    <Container className='mb-2 mt-5'>
         <Header title={"Our Services"}/>
         <Row>
-            <h4 className='text-center'>
-                Services at <span className='product-color'>CRYSTAL Animal Hospital</span>
+            <h4 className='text-center mt-3'>
+                Services at <span className='product-color gap-2'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
                 <span className='gap-2 '>
-                    <FaClock/> - 24-Hour Service
+                    <br /> <FaClock/>-24-Hour Service
                 </span>
             </h4>
         </Row>
@@ -21,56 +29,86 @@ const HospitalServices = () => {
         <Row xs={1} md={2} lg={3} className='g-4 mt-2'>
             <Col>
                 <Card>
-                    <Card.Body>
-                        <Card.Title className='product-color'>
-                            <FaWifi/>Pet Store
+                    <Card.Body className='text-center'>
+                        <Card.Title className='product-color text-center'>
+                            <MdPets/><br />
+                            Pet Care
                         </Card.Title>
-                        <Card.Text>Stay Connected with Us</Card.Text>
+                        <Card.Text>A perfect pet sitter for your pet in the absence of you.
+                            We provide professional care and attention to all kinds of pets.
+                        </Card.Text>
 
                     </Card.Body>
                 </Card>
             </Col>
             <Col>
                 <Card>
-                    <Card.Body>
-                        <Card.Title className='product-color'>
-                            <FaUtensils/>Pet Care
+                    <Card.Body className='text-center'>
+                        <Card.Title className='product-color text-center'>
+                            <FaClinicMedical/><br />Pet Clinic
                         </Card.Title>
-                        <Card.Text>Stay Connected with Us</Card.Text>
+                        <Card.Text> We provide medical care for pets, including routine check-ups, 
+                            vaccinations, and treatments for illnesses and injuries.</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
             <Col>
                 <Card>
-                    <Card.Body>
+                    <Card.Body className='text-center'>
                         <Card.Title className='product-color'>
-                            <FaUtensils/>Pet Care
+                            <GiHairStrands/><br />Grooming
                         </Card.Title>
-                        <Card.Text>Stay Connected with Us</Card.Text>
+                        <Card.Text>This includes brushing the fur , bathing the pet, trimming or 
+                            clipping the fur, cleaning the ears and eyes, and trimming the nails.</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
             <Col>
                 <Card>
-                    <Card.Body>
+                    <Card.Body className='text-center'>
                         <Card.Title className='product-color'>
-                            <FaUtensils/>Pet Care
+                            <MdVaccines/><br />Vaccination
                         </Card.Title>
-                        <Card.Text>Stay Connected with Us</Card.Text>
+                        <Card.Text>The process involves a consultation with a 
+                            veterinarian to determine the appropriate vaccination for the animal.</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
             <Col>
                 <Card>
-                    <Card.Body>
+                    <Card.Body className='text-center'>
                         <Card.Title className='product-color'>
-                            <FaUtensils/>Pet Care
+                            <FaHospital/><br />Pet Store & pharmacy
                         </Card.Title>
-                        <Card.Text>Stay Connected with Us</Card.Text>
+                        <Card.Text> variety of products for pets, including food, toys, supplies and  
+                            medications for your companion.</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
+            <Col>
+                <Card>
+                    <Card.Body className='text-center'>
+                        <Card.Title className='product-color'>
+                            <TbDentalBroken/><br />Dental Care
+                        </Card.Title>
+                        <Card.Text> Regular dental care is essential for pets' overall health, as poor 
+                            oral hygiene can lead to a range of health problems, .
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
+            
+            <span className='product-color gap-2'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
+            <p className='text-center'><strong>Providing Top-Notch Veterinary Care</strong></p>
+            
+                <NavLink className='nav-link text-center' to={"/appointment-form"}>
+                <Button variant="outline-success" className='login'>
+                            Make An Appointment
+                </Button>
+                </NavLink>
+            
         </Row>
+        <hr />
     </Container>
     </>
   )

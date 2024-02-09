@@ -3,6 +3,10 @@ import HeaderMain from '../layout/HeaderMain'
 import HospitalServices from '../common/HospitalServices'
 import Parallax from '../common/Parallax'
 import AboutUs from '../common/AboutUs'
+import CounterAnimation from '../layout/CounterAnimation'
+import Footer from '../layout/Footer'
+import ContactForm from '../../ContactUs/ContactForm'
+import TestiMonials from '../Testimonials/TestiMonials'
 
 const homepage = () => {
   return (
@@ -13,6 +17,13 @@ const homepage = () => {
           <Parallax/>
           <HospitalServices/>
           <Parallax/>
+          <CounterAnimation/>
+          <ContactForm/>
+          <Parallax/>
+          <TestiMonials/>
+          <Footer/>
+          
+          
       </section>
     </section>
   )

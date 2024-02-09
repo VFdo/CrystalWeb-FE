@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,NavLink } from 'react-router-dom'
 
 const ContactSummary = ({contacting, isFormValid, onConfirm}) => {
     const [isContactingConfirmed, setIsContactingConfirmed] = useState(false)
@@ -27,15 +27,15 @@ const ContactSummary = ({contacting, isFormValid, onConfirm}) => {
         <p>Full Name : <strong>{contacting.clientName}</strong></p>
         <p>Email : <strong>{contacting.clientEmail}</strong></p>
         <p>Phone Number : <strong>{contacting.phoneNumber}</strong></p>
-        <p>Additional Info : <strong>{contacting.additionalInfo}</strong></p>
+        <p>Additional Info : <strong>{contacting.message}</strong></p>
         <div>
             {isFormValid && !isContactingConfirmed ?(
-                <Button
-                    variant='sucess'
-                    onClick={handleConfirmcontacting}
-                >
-                    Send Message
+                
+                <NavLink className='nav-link text-center' to={"/message-success"}>
+                <Button variant="outline-success" className='login' onClick={handleConfirmcontacting}>
+                            Send Message
                 </Button>
+                </NavLink>
             ):isContactingConfirmed(
                 <div className='d-flex justify-content-center align-items-center'>
                     <div className='spinner-border text-primary' role='status'>
