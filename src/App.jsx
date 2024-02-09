@@ -1,34 +1,55 @@
-import "./App.css";
-import Layout from "./components/layout";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from "./components/about";
-import Shop from "./components/shop";
-import Services from "./components/services";
-import Contact from "./components/contact";
-import ItemPage from "./pages/ItemPage";
-import PetPage from "./pages/pet/PetPage";
-import PetHistory from "./pages/pet/PetHistory";
-import PetDetailsForm from "./pages/pet/PetDetailsForm";
-import EmployeeDetailsForm from "./pages/employee/EmployeeDetailsForm";
-import AdminView from "./pages/employee/AdminView";
-import EmployeePage from "./pages/employee/EmployeePage";
-import AddEmployee from "./pages/employee/AddEmployee";
+import React from "react"
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "/node_modules/bootstrap/dist/js/bootstrap.min.js"
+import AddProduct from "./components/products/addProducts"
+import ExistingProducts from "./components/products/ExistingProducts";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Home from "./components/Home/homepage"
+import EditProduct from "./components/products/EditProduct";
+import  NavBar from './components/layout/NavBar';
+import ProductListing from "./components/products/ProductListing";
+import CheckOut from "./components/common/CheckOut";
+import HospitalServices from "./components/common/HospitalServices";
+import ContactForm from "./ContactUs/ContactForm";
+import AboutUs from "./components/common/AboutUs";
+import ContactSucess from "./ContactUs/ContactSucess"
+import AppointmentForm from "./components/Appointment/AppointmentForm";
+import ExistingAppointments from "./components/Appointment/ExistingAppointments";
+import TestiMonials from "./components/Testimonials/TestiMonials";
 
-function App() { return (
+
+function App() {
+  
+  return (
     <>
-      <BrowserRouter>
+    <main>
+      <Router>
+        <NavBar/>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="about" element={<About />} />
-            <Route path="shop" element={<Shop />} />
-            {/* <Route path='services' element={<PetPage titleText = "test" descriptionText = "desc" buttonLeft = "view" buttonRight = "history"/>}/> */}
-            <Route path="services" element={<AddEmployee />} />
-            <Route path="contact" element={<Contact />} />
-          </Route>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/edit-product/:productId" element={<EditProduct/>}/>
+          <Route path="/existing-products" element={<ExistingProducts/>}/>
+          <Route path="/add-product" element={<AddProduct/>}/>
+          <Route path="/hospital-services" element={<HospitalServices/>}/>
+          <Route path="/book-appointment" element={<AppointmentForm/>}/>
+          <Route path="/existing-appointments" element={<ExistingAppointments/>}/>
+          <Route path="/products/all-products" element={<ProductListing/>}/>
+      
+          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/contact-form" element={<ContactForm/>}/>
+          <Route path="/testimonials" element={<TestiMonials/>}/>
+
+          <Route path="/message-success" element={<ContactSucess/>}/>
+
+          
         </Routes>
-      </BrowserRouter>
+      </Router>
+    </main>
+    
     </>
-  );
+  )
+  
+   
 }
 
-export default App;
+export default App
