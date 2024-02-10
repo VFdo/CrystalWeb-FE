@@ -11,8 +11,7 @@ import PetHistory from "./pages/pet/PetHistory";
 import PetDetailsForm from "./pages/pet/PetDetailsForm";
 import EmployeeDetailsForm from "./pages/employee/EmployeeDetailsForm";
 import AdminView from "./pages/employee/AdminView";
-import EmployeePage from "./pages/employee/EmployeePage";
-import AddEmployee from "./pages/employee/AddEmployee";
+import InventoryHistory from "./pages/inventory/InventoryHistory";
 
 function App() { return (
     <>
@@ -22,7 +21,7 @@ function App() { return (
             <Route path="about" element={<About />} />
             <Route path="shop" element={<Shop />} />
             {/* <Route path='services' element={<PetPage titleText = "test" descriptionText = "desc" buttonLeft = "view" buttonRight = "history"/>}/> */}
-            <Route path="services" element={<AddEmployee />} />
+            <Route path="services" element={<InventoryHistory />} />
             <Route path="contact" element={<Contact />} />
           </Route>
         </Routes>
