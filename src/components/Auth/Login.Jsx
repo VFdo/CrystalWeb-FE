@@ -22,8 +22,7 @@ const Login = () => {
         e.preventDefault()
         const success  = await loginUser(login)
         if(success){
-            const token = success.token
-            console.log("token value:", token)
+            console.log("login successful!")
             navigate("/")
             window.location.reload()
             }else{
@@ -49,10 +48,9 @@ const Login = () => {
                     resolve(true)
                     response.json()
             .then((responseData) => {
-                sessionStorage.setItem('token', responseData.token)
+                sessionStorage.setItem('token', 'Bearer ' + responseData.token)
                 console.log('Data saved')
-            }
-                )
+            })
                 } else {
                     resolve(false)
                 }

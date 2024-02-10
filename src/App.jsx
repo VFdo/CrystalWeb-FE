@@ -17,10 +17,10 @@ import AppointmentForm from "./components/Appointment/AppointmentForm";
 import ExistingAppointments from "./components/Appointment/ExistingAppointments";
 import TestiMonials from "./components/Testimonials/TestiMonials";
 import Login from "./components/Auth/Login.jsx";
+import Registraion from "./components/Auth/Registration.jsx";
 
 
-function App() {
-  
+function App() {  
   return (
     <>
     <main>
@@ -40,6 +40,7 @@ function App() {
           <Route path="/testimonials" element={<TestiMonials/>}/>
           <Route path="/message-success" element={<ContactSucess/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Registraion/>}/>
 
 
           
