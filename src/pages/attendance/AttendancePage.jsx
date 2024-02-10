@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Header from "../../components/common/Header";
 import Footer from "../../components/layout/Footer";
 import CustomModal from "../../components/common/Modal";
+import CurrentDateComp from "../../components/CurrentDateComp";
 
 function AttendancePage() {
   // State to store form field values
@@ -34,10 +35,11 @@ function AttendancePage() {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12 text-center">
-              <h1 className=" text">Employee Attendance Check-in Portal</h1>
-              <p className=" text fs-2">
+              <h3 className=" text">Employee Attendance Check-in Portal</h3>
+              <p className=" text fs-4">
                 Please enter your Employee ID, password and Check in time
               </p>
+              <CurrentDateComp />
             </div>
           </div>
         </div>
