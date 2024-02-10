@@ -18,6 +18,7 @@ import ExistingAppointments from "./components/Appointment/ExistingAppointments"
 import TestiMonials from "./components/Testimonials/TestiMonials";
 import Login from "./components/Auth/Login.jsx";
 import Registraion from "./components/Auth/Registration.jsx";
+import Profile from "./components/Auth/Profile.jsx";
 
 
 function App() {  
@@ -41,6 +42,9 @@ function App() {
           <Route path="/message-success" element={<ContactSucess/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Registraion/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          
+
 
 
           

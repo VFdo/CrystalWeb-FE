@@ -49,7 +49,9 @@ const Login = () => {
                     response.json()
             .then((responseData) => {
                 sessionStorage.setItem('token', 'Bearer ' + responseData.token)
+                sessionStorage.setItem('userId', responseData.id)
                 sessionStorage.setItem('dataId', responseData.dataId)
+                sessionStorage.setItem('role', responseData.roles[0])
                 console.log('Data saved')
             })
                 } else {

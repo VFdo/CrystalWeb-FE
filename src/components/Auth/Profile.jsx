@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom'
 import { TextField, Button, Stack, Paper, Box } from '@mui/material';
 
 const Profile = () => {
+    const userType = sessionStorage.getItem('role')
     const[errorMessage, setErrorMessage] = useState("")
-    // user
+    const[uPass, setPass] = useState('temp')
+
     const[user, setUser] = useState({
         userName : "",
         password: "",
@@ -12,7 +14,6 @@ const Profile = () => {
         role:[""],
     })
 
-    // client
     const[client, setClient] = useState({
         name : "",
         nic: "temp",
@@ -21,11 +22,12 @@ const Profile = () => {
         email:"",
     })
 
-    // employee
-
-    // admin
-
     const navigate = useNavigate(null) 
+
+    const handleEmployeeClick = () => {
+        // TODO: add path to Employee Details component
+        navigate("/");
+    };
 
     const handleUserInputChange = (e) =>{
         if(e.target.name == "role"){
@@ -53,77 +55,83 @@ const Profile = () => {
     const handleUserSave = async(e) =>{
         e.preventDefault()
         const success1  = await saveUser(user)
-        const success2  = await saveClient(client)
+        var success2 = true
+        if(userType == 'CLIENT'){
+             success2  = await saveClient(client)
+        } 
         if(success1 && success2){
-            console.log("user registration successful!")
+            console.log("user details updated successfully!")
             navigate("/login")
             window.location.reload()
             }else{
                 console.log("An error has occured!");
-                setErrorMessage("Unable to register user")
+                setErrorMessage("Unable to update user")
             }
             setTimeout(() => {
                 setErrorMessage("")
             },4000)
         }
     
-    // const saveUser = (user) => {
-    //     return new Promise((resolve) => {
-    //         console.log('saving user...', user);
-    //         fetch('http://localhost:8080/user', {
-    //           method: 'POST',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': sessionStorage.getItem('token'),
-    //           },
-    //           body: JSON.stringify(user),
-    //         })
-    //             .then((response) => {
-    //               if(response.ok){
-    //                 resolve(true)
-    //                 response.json()
-    //             .then((responseData) => {
-    //                     console.log('Data saved:', responseData)
-    //               })}
-    //               else {
-    //                 resolve(false)
-    //               }
-    //           })
-    //           .catch((error) => console.error('Error saving data:', error));
-    //         });        
-    // };
+    const saveUser = (user) => {
+        return new Promise((resolve) => {
+            console.log('updating user...', user);
+            user.password = uPass
+            const fetchUrl = 'http://localhost:8080/user/' + sessionStorage.getItem('userId')
+            fetch(fetchUrl, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('token'),
+              },
+              body: JSON.stringify(user),
+            })
+                .then((response) => {
+                  if(response.ok){
+                    resolve(true)
+                    response.json()
+                .then((responseData) => {
+                        console.log('Data saved:', responseData)
+                  })}
+                  else {
+                    resolve(false)
+                  }
+              })
+              .catch((error) => console.error('Error saving data:', error));
+            });        
+    };
 
-    // const saveClient = (client) => {
-    //     return new Promise((resolve) => {
-    //         console.log('saving client...', client);
-    //         console.log('client data:', client);
-    //         fetch('http://localhost:8080/client', {
-    //           method: 'POST',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': sessionStorage.getItem('token'),
-    //           },
-    //           body: JSON.stringify(client),
-    //         })
-    //             .then((response) => {
-    //               if(response.ok){
-    //                 resolve(true)
-    //                 response.json()
-    //             .then((responseData) => {
-    //                     console.log('Data saved:', responseData)
-    //               })}
-    //               else {
-    //                 resolve(false)
-    //               }
-    //           })
-    //           .catch((error) => console.error('Error saving data:', error));
-    //         });        
-    // };
+    const saveClient = (client) => {
+        return new Promise((resolve) => {
+            console.log('saving client...', client);
+            const fetchUrl = 'http://localhost:8080/client/' + sessionStorage.getItem('dataId')
+            fetch(fetchUrl, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('token'),
+              },
+              body: JSON.stringify(client),
+            })
+                .then((response) => {
+                  if(response.ok){
+                    resolve(true)
+                    response.json()
+                .then((responseData) => {
+                        console.log('Data saved:', responseData)
+                  })}
+                  else {
+                    resolve(false)
+                  }
+              })
+              .catch((error) => console.error('Error saving data:', error));
+            });        
+    };
 
     const getUser = async () => {
         try {
             console.log('Fetching user...');
-            const response = await fetch('http://localhost:8080/user/', {
+            const fetchUrl = 'http://localhost:8080/user/' + sessionStorage.getItem('userId')
+            const response = await fetch(fetchUrl, {
             headers: {
                 'Authorization': sessionStorage.getItem('token'),
                 'Content-Type': 'application/json', 
@@ -133,17 +141,24 @@ const Profile = () => {
                 throw new Error('Failed to fetch user data');
             }
             const fetchedData = await response.json();
-            console.log('Data received:', fetchedData);
-            setUser(fetchedData);
+            console.log('user data received:', fetchedData);
+            setUser({
+                ...user,
+                userName: fetchedData.payload.username,
+                email: fetchedData.payload.email,
+                role: fetchedData.payload.role
+              });
+            setPass(fetchedData.payload.password)
         } catch (error) {
             console.error('Error during fetch:', error);
         }
     };
 
-    const getClient = async () => {
+    const getData = async () => {
         try {
             console.log('Fetching client...');
-            const response = await fetch('http://localhost:8080/client/', {
+            const fetchUrl = 'http://localhost:8080/client/' + sessionStorage.getItem('dataId')
+            const response = await fetch(fetchUrl, {
             headers: {
                 'Authorization': sessionStorage.getItem('token'),
                 'Content-Type': 'application/json', 
@@ -153,20 +168,26 @@ const Profile = () => {
                 throw new Error('Failed to fetch client data');
             }
             const fetchedData = await response.json();
-            console.log('Data received:', fetchedData);
-            setUser(fetchedData);
+            console.log('client data received:', fetchedData);
+            setClient({
+                ...client,
+                name: fetchedData.payload.name,
+                address: fetchedData.payload.address,
+                phone: fetchedData.payload.phone,
+                email: fetchedData.payload.email
+              });
         } catch (error) {
             console.error('Error during fetch:', error);
         }
     };
 
-    
     useEffect(() => {
         getUser();
+        if(userType == 'CLIENT'){
+            getData();
+        }
       }, []);
     
-
-
 return(
     <Box
     sx={{
@@ -185,10 +206,13 @@ return(
     <Paper elevation={3} >
     <React.Fragment>
     {errorMessage && <p className='alert alert-danger'>{errorMessage}</p>}
-            <h2>Register Form</h2>
+            <h2>Update User Details</h2>
             <br></br>
             <form onSubmit={handleUserSave}>
-            <TextField
+            <div>
+            {userType === 'CLIENT' && (
+                <div>
+                    <TextField
                     type="text"
                     variant='outlined'
                     color='primary'
@@ -223,6 +247,10 @@ return(
                 fullWidth
                 sx={{mb: 4}}
             />
+            </div>
+            )}
+            </div>
+            
             <TextField
                     type="email"
                     variant='outlined'
@@ -262,16 +290,18 @@ return(
                     // onChange={e => setPassword(e.target.value)}
                     value={user.password}
                     onChange={handleUserInputChange}
-                    required
                     fullWidth
                     sx={{mb: 4}}
                 />
                 </Stack>
-                <Button variant="outlined" color="primary" type="submit">Register</Button>
+                <Button variant="outlined" color="primary" type="submit">Update</Button>
             </form>
             <br></br>
-            <small>Already have an account? <Link to="/login">Login Here</Link></small>
-     
+            <div>
+            {userType !== 'CLIENT' && (
+                <Button variant="outlined" color="primary" onClick={handleEmployeeClick}>Update Employee Details</Button>
+            )}
+            </div>
         </React.Fragment>
         </Paper>
         </Box>
@@ -279,4 +309,4 @@ return(
     )
 };
 
-export default Registraion
+export default Profile
