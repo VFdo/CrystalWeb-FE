@@ -12,16 +12,35 @@ const Registraion = () => {
         role:["CLIENT"],
     })
 
+    const[client, setClient] = useState({
+        name : "",
+        nic: "temp",
+        address:"",
+        phone:[""],
+        email:"",
+    })
+
     const navigate = useNavigate(null) 
 
     const handleUserInputChange = (e) =>{
         setUser({...user, [e.target.name]: e.target.value})
     }
 
+    const handleClientInputChange = (e) =>{
+        if(e.target.name == "phone"){
+            const updatedPhone = [...client.phone]; 
+            updatedPhone[0] = e.target.value; 
+            setClient({ ...client, phone: updatedPhone });
+        } else{
+            setClient({...client, [e.target.name]: e.target.value})
+        }
+    }
+
     const handleUserSave = async(e) =>{
         e.preventDefault()
-        const success  = await saveUser(user)
-        if(success){
+        const success1  = await saveUser(user)
+        const success2  = await saveClient(client)
+        if(success1 && success2){
             console.log("user registration successful!")
             navigate("/login")
             window.location.reload()
@@ -60,6 +79,33 @@ const Registraion = () => {
             });        
     };
 
+    const saveClient = (client) => {
+        return new Promise((resolve) => {
+            console.log('saving client...', client);
+            console.log('client data:', client);
+            fetch('http://localhost:8080/client', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('token'),
+              },
+              body: JSON.stringify(client),
+            })
+                .then((response) => {
+                  if(response.ok){
+                    resolve(true)
+                    response.json()
+                .then((responseData) => {
+                        console.log('Data saved:', responseData)
+                  })}
+                  else {
+                    resolve(false)
+                  }
+              })
+              .catch((error) => console.error('Error saving data:', error));
+            });        
+    };
+
 return(
     <Box
     sx={{
@@ -81,6 +127,58 @@ return(
             <h2>Register Form</h2>
             <br></br>
             <form onSubmit={handleUserSave}>
+            <TextField
+                    type="text"
+                    variant='outlined'
+                    color='primary'
+                    label="Name"
+                    name='name'
+                    onChange={handleClientInputChange}
+                    value={client.name}
+                    fullWidth
+                    required
+                    sx={{mb: 4}}
+            />
+            <TextField
+                type="text"
+                variant='outlined'
+                color='primary'
+                label="Address"
+                name="address"
+                onChange={handleClientInputChange}
+                value={client.address}
+                fullWidth
+                sx={{mb: 4}}
+            />
+            <TextField
+                type="phone"
+                variant='outlined'
+                color='primary'
+                label="Phone"
+                name='phone'
+                inputProps={{ maxLength: 10 }}
+                onChange={handleClientInputChange}
+                value={client.phone}
+                fullWidth
+                sx={{mb: 4}}
+            />
+            <TextField
+                    type="email"
+                    variant='outlined'
+                    color='primary'
+                    label="Email"
+                    name='email'
+                    // onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => {
+                        handleUserInputChange(e);
+                        handleClientInputChange(e);
+                      }}
+                    value={user.email}
+                    fullWidth
+                    required
+                    sx={{mb: 4}}
+                />
+                <br></br>
                 <Stack spacing={2} direction="row" sx={{marginBottom: 4}}>
                     <TextField
                         type="text"
@@ -94,8 +192,7 @@ return(
                         fullWidth
                         required
                     />
-                </Stack>
-                <TextField
+                    <TextField
                     type="password"
                     variant='outlined'
                     color='primary'
@@ -108,19 +205,7 @@ return(
                     fullWidth
                     sx={{mb: 4}}
                 />
-                <TextField
-                    type="email"
-                    variant='outlined'
-                    color='primary'
-                    label="Email"
-                    name='email'
-                    // onChange={e => setEmail(e.target.value)}
-                    onChange={handleUserInputChange}
-                    value={user.email}
-                    fullWidth
-                    required
-                    sx={{mb: 4}}
-                />
+                </Stack>
                 <Button variant="outlined" color="primary" type="submit">Register</Button>
             </form>
             <br></br>
