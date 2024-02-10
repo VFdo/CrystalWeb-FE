@@ -14,6 +14,7 @@ import CheckOut from "./components/common/CheckOut";
 import HospitalServices from "./components/common/HospitalServices";
 import ContactForm from "./ContactUs/ContactForm";
 import AttendancePage from "./pages/attendance/AttendancePage";
+import AppointmentSummary from "./components/Appointment/AppointmentSummary";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
             <Route path="/hospital-services" element={<HospitalServices />} />
             <Route path="/book-appointment" element={<CheckOut />} />
             <Route path="/browse-all-products" element={<ProductListing />} />
-            <Route path="/attendance" element={<AttendancePage />} />
+            <Route path="/Admin" element={<AppointmentSummary />} />
             <Route path="/appointment-form" element={<ContactForm />} />
           </Routes>
         </Router>
