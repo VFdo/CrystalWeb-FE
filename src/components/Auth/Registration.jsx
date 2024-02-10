@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import { TextField, Button, Container, Stack, Paper, Box } from '@mui/material';
+import { TextField, Button, Stack, Paper, Box } from '@mui/material';
 
 const Registraion = () => {
-    // const history = useHistory();
     const[errorMessage, setErrorMessage] = useState("")
+    
     const[user, setUser] = useState({
         userName : "",
         password: "",
         email:"",
+        dataId:"",
         role:["CLIENT"],
     })
 
@@ -38,13 +39,16 @@ const Registraion = () => {
 
     const handleUserSave = async(e) =>{
         e.preventDefault()
-        const success1  = await saveUser(user)
-        const success2  = await saveClient(client)
-        if(success1 && success2){
-            console.log("user registration successful!")
-            navigate("/login")
-            window.location.reload()
-            }else{
+        const success1  = await saveClient(client)
+        if(success1){
+            const success2  = await saveUser(user)
+            if(success2){
+                console.log("user registration successful!")
+                navigate("/login")
+                window.location.reload()
+                }
+        }
+        else{
                 console.log("An error has occured!");
                 setErrorMessage("Unable to register user")
             }
@@ -97,6 +101,8 @@ const Registraion = () => {
                     response.json()
                 .then((responseData) => {
                         console.log('Data saved:', responseData)
+                        console.log(responseData.payload.refId)
+                        setUser({ ...user, dataId: responseData.payload.refId });
                   })}
                   else {
                     resolve(false)
