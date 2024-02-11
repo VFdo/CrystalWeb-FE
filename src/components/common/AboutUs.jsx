@@ -8,17 +8,17 @@ import About from '../../assets/man.png'
 const AboutUs = () => {
   return (
     <>
-    <Container className='mb-2 mt-4'>
-        <Header title={"About Us"}/>
+    <Container className='mb-2 mt-5'>
+        <Header title={"About Us"} />
         <Row>
-            <h4 className='text-center'>
-                About <span className='product-color'>CRYSTAL Animal Hospital</span>
+            <h4 className='text-center mt-2'>
+               About Us <span className='product-color'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
             </h4>
         </Row>
         <hr />
         <Col>
-            <Row>
-                <Card  style={{ width: "100vh", height:'20rem'}} className='col-2  mx-auto my-2 shadow-sm rounded'>
+            <Row className='about gap-4 mb-4'>
+                <Card  style={{ width: "80vh", height:'15rem'}} >
                     <Card.Body>
                         <Card.Title className='product-color text-center'>
                             Our Mission
@@ -28,9 +28,7 @@ const AboutUs = () => {
 
                     </Card.Body>
                 </Card>
-            </Row>
-            <Row >
-                <Card style={{ width: "100vh", height:'20rem'}} className='col-2  mx-auto my-2 shadow-sm rounded'>
+                <Card style={{ width: "80vh", height:'15rem'}} >
                     <Card.Body>
                         <Card.Title className='product-color text-center'>
                             Our Story
@@ -41,6 +39,7 @@ const AboutUs = () => {
                 </Card>
             </Row>
         </Col>
+        <hr />
     </Container>
     </>
   )

@@ -23,6 +23,7 @@ const AppointmentSummary = ({ booking, isFormValid, onConfirm }) => {
   }, [isBookingConfirmed, navigate]);
 
   return (
+<<<<<<< HEAD
     <div className="card card-body mt-5">
       <h4>Appointment Summary</h4>
 
@@ -52,6 +53,17 @@ const AppointmentSummary = ({ booking, isFormValid, onConfirm }) => {
       <p>
         Additional Info : <strong>{booking.additionalInfo}</strong>
       </p>
+=======
+    <div className='card card-body mt-5'>
+        <h4>Appointment Summary</h4>
+        <p>Photo : <strong>{booking.photo}</strong></p>
+        <p>Full Name : <strong>{booking.clientName}</strong></p>
+        <p>Email : <strong>{booking.clientEmail}</strong></p>
+        <p>Phone Number : <strong>{booking.phoneNumber}</strong></p>
+        <p>Check In Date : <strong>{moment(booking.checkInDate).format('DD/MM/YYYY')}</strong></p>
+        <p>Check In Time: <strong>{moment(booking.checkInTime).format('HH:mm A')} </strong></p>
+        <p>Number of Pets : <strong>{booking.numberOfPets}</strong></p>
+>>>>>>> feature/common-components
     </div>
   );
 };

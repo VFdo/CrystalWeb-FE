@@ -1,4 +1,5 @@
 import React from 'react'
+import HomeContainer from './HomeContainer'
 
 const HeaderMain = () => {
   return (
@@ -7,10 +8,14 @@ const HeaderMain = () => {
 
         </div>
         <div className='animated-texts overlay-content'>
-            <h1>Welcome to <span className='product-color'>Crystal Animal Hospital</span></h1>
-            <h4>Experience the best Animal Hospital for your Companion </h4>
-
+            <h1 className='text-center fst-italic'> Welcome To <br /></h1>
+            <h1><span className='product-color'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span></h1>
+            <h5 className='text-center fst-italic'>Experience the best Animal Hospital for your Companion </h5>
+            
+          
         </div>
+        <div className='home_card'><HomeContainer/></div>
+        
 
     </header>
   )

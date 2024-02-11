@@ -1,24 +1,26 @@
 import React from 'react'
 import { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {addProduct} from "../utils/ApiFunctions"
 import ProductTypeSelector from '../common/ProductTypeSelector'
+import { Row ,Card,Button} from 'react-bootstrap'
+import Header from '../common/Header'
 
 const addProducts = () => {
   const [newProduct, setnewProduct] = useState({
     photo : null,
-    catergory:"",
-    price:"",
+    productType:"",
+    productPrice:"",
   })
 
   const [imagePreview, setImagePreview] = useState("")
-  const [successMessage,setSucessMessage] = useState("")
+  const [successMessage,setSuccessMessage] = useState("")
   const [errorMessage,setErrorMessage] = useState("")
 
   const handleProductInputChange = (e)=>{
     const name = e.target.name
     let value = e.target.value
-    if(name === "price" ){
+    if(name === "productPrice" ){
       if(!isNaN(value)){
       value.parseInt(value)
   } else{
@@ -37,10 +39,10 @@ const addProducts = () => {
   const handleSubmit =async(e) =>{
     e.preventDefault()
     try{
-      const sucess = await addProduct(newProduct.photo,newProduct.catergory, newProduct.price);
-      if(sucess !==undefined){
-        setSucessMessage("A new Product was added to the list")
-        setnewProduct({photo: null, category:"", price:""})
+      const success = await addProduct(newProduct.photo,newProduct.productType, newProduct.productPrice);
+      if(success !==undefined){
+        setSuccessMessage("A new Product was added to the list")
+        setnewProduct({photo: null, productType:"", productPrice:""})
         setImagePreview("")
         setErrorMessage("")
       }else{
@@ -50,7 +52,7 @@ const addProducts = () => {
       setErrorMessage(error.message)
     }
     setTimeout(()=> {
-      setSucessMessage("")
+      setSuccessMessage("")
       setErrorMessage("")
     },3000)
   }
@@ -58,56 +60,80 @@ const addProducts = () => {
   return (
     <>
     <section className='container mt-5 mb-3'>
+          <Row>
+              <h4 className='text-center'>
+                 <span className='product-color gap-2'><span className='logo-text'>CRYSTAL</span> Animal Hospital</span>
+                  <span className='gap-2 '>
+                      <br /> Admin Panel - Add Products
+                  </span>
+              </h4>
+          </Row>
+        <hr />
+      
       <div className='row justify-content-center'>
-        <div className='col-md-8 col-lg-6'>
-          <h2 className='mt-5 mb-2'>Add New Product</h2>
-          {successMessage && (
-            <div className='alert alert-sucess fade show'>{successMessage}</div>
-          )}
-          {errorMessage && (
-            <div className='alert alert-danger fade show'>{errorMessage}</div>
-          )}
+      <Card  style={{ width: "30rem", height:'32rem'}}>
+          <Card.Body>
+            <Card.Title className='product-color text-center'>
+              Add New Product
+            </Card.Title>
+            <Card.Text >
+            <div >
+              {successMessage && (
+                <div className='alert alert-sucess fade show'>{successMessage}</div>
+              )}
+              {errorMessage && (
+                <div className='alert alert-danger fade show'>{errorMessage}</div>
+              )}
 
-          <form onSubmit={handleSubmit} >
-            <div className='mb-3'>
-              <label htmlFor="catergory" className="form-label">Catergory</label>
-              <div>
-                <ProductTypeSelector handleProductInputChange={handleProductInputChange} newProduct={newProduct}/>
-              </div>
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="price" className="form-label">Product Price</label>
-              <input
-                className ="form-control"
-                id ="price"
-                name="price"
-                onChange={handleProductInputChange}
-                 />
-              
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="photo" className="form-label">Photo</label>
-              <input 
-                id='photo'
-                name='photo'
-                type='file'
-                className='form-control'
-                onChange={handleImageChange}
-               />
-               {imagePreview && (<img src={imagePreview} alt='product photo' style={{maxWidth:"400px", maxHeight:"400px"}}
-                className='mb-3'/>
-               ) }
-            </div>
-            <div className='d-grid d-md-flex mt-2'>
-              <Link to={"/existing-products"} className="btn btn-outline-info">
-                Back
-              </Link>
-              <button className='btn btn-outline-primary ml-5'>Save Product</button>
-            </div>
+              <form onSubmit={handleSubmit} >
+                <div className='mb-3'>
+                  <label htmlFor="productType" className="form-label logo-text">Catergory</label>
+                  <div>
+                    <ProductTypeSelector handleProductInputChange={handleProductInputChange} newProduct={newProduct}/>
+                  </div>
+                </div>
+                <div className='mb-3'>
+                  <label htmlFor="productPrice" className="form-label logo-text">Product Price</label>
+                  <input
+                    required
+                    className ="form-control"
+                    id ="productPrice"
+                    name="productPrice"
+                    onChange={handleProductInputChange}
+                    />
+                  
+                </div>
+                
+                <div className='mb-3'>
+                  <label htmlFor="photo" className="form-label logo-text">Photo</label>
+                  <input 
+                    id='photo'
+                    name='photo'
+                    type='file'
+                    className='form-control'
+                    onChange={handleImageChange}
+                  />
+                  {imagePreview && (<img src={imagePreview} alt='product photo' style={{maxWidth:"0", maxHeight:"0"}}
+                    className='mb-3'/>
+                  ) }
+                </div>
+                <div className='d-grid d-md-flex gap-3 mt-3'>
+                  <NavLink className='nav-link mt-5' to={"/admin"}>
+                  <Button variant="outline-success" className='login'>
+                      Back
+                  </Button>
+                  </NavLink>
+                  <Button variant="outline-success" className='login mt-5' onClick={handleSubmit}>Save Product</Button>
+                </div>
 
-          </form>
-        </div>
+              </form>
+            </div>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        
       </div>
+      <hr />
     </section>
     </>
   )

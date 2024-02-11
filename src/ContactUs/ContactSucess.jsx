@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import Header from '../common/Header'
+import Header from '../components/common/Header'
 
 const ContactSucess = () => {
     const location = useLocation()
