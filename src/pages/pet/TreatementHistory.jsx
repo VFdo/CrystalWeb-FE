@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
 
 const styles = {
     tableContainer: {
@@ -43,7 +44,7 @@ const TreatementHistory = () => {
     useEffect(() => {
       const fetchAllPets = async () => {
         try{
-          console.log('Fetching pet data...');
+          console.log('Fetching record data...');
         // TODO: Fix API - medical records for PET 
           const res = await fetch('http://localhost:8080/medical-record');
           if (!res.ok) {
@@ -70,7 +71,11 @@ const TreatementHistory = () => {
                     <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ 
+                      minWidth: column.minWidth, 
+                      fontWeight: 'bold',
+                      backgroundColor: '#66CDAA'
+                    }}
                     >
                     {column.label}
                     </TableCell>
@@ -86,9 +91,15 @@ const TreatementHistory = () => {
                         const value = row[column.id];
                         return (
                             <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : value}
+                              {column.id === 'VetId' ? (
+                                <Avatar src="https://talkjs.com/new-web/avatar-10.jpg"></Avatar>
+                              ) : (
+                                column.format && typeof value === 'number' ? (
+                                  column.format(value)
+                                ) : (
+                                  value
+                                )
+                              )}
                             </TableCell>
                         );
                         })}
