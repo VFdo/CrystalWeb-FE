@@ -22,6 +22,7 @@ import Profile from "./components/Auth/Profile.jsx";
 import PetPage from "./pages/pet/PetPage.jsx";
 import PetDetailsForm from "./pages/pet/PetDetailsForm.jsx";
 import TreatementHistory from "./pages/pet/TreatementHistory.jsx";
+import AdminView from "./pages/employee/AdminView.jsx";
 
 
 function App() {  
@@ -47,7 +48,7 @@ function App() {
           <Route path="/register" element={<Registraion/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/pet" element={<PetPage/>}/>
-          <Route path="/medical-records" element={<TreatementHistory/>}/>
+          <Route path="/medical-records" element={<AdminView/>}/>
           <Route path="/pet-update" element={<PetDetailsForm/>}/>
           
 

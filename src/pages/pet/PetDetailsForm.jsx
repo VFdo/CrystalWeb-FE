@@ -34,6 +34,7 @@ const styles = {
   
   const PetForm = ({ petData, onClose, onChange, onSave }) => {
     const animalTypes = ["dog", "cat", "other"]
+
     const handleNameChange = (event) => {
         onChange({ ...petData, name: event.target.value });
     };
@@ -102,49 +103,108 @@ const styles = {
   };
 
   const PetDetailsForm = () => {
-    const [data, setData] = useState({ name: '', animalType: '', dateOfBirth: '' });
+    const [data, setData] = useState({ 
+      name: '', 
+      typeOfAnimal: '', 
+      dob: '',
+      gender:'',
+      photo:'',
+      clientRefId:'',
+    });
+
+    const[errorMessage, setErrorMessage] = useState("")
     // const [open, setOpen] = useState(true);
     const open = true
-  
-    useEffect(() => {
-      console.log('Fetching data...');
-      fetch('http://localhost:8080/pet/d4c9b823-928a-453b-8163-5184843625cb')
-        .then((res) => res.json())
-        .then((fetchedData) => {
-          console.log('Data received:', fetchedData);
-          setData(fetchedData);
-        })
-        .catch((err) => {
-          console.error('Error during fetch:', err);
-        });
-    }, []);
   
     const navigate = useNavigate(null) 
 
     // const handleOpen = () => setOpen(true);
     const handleClose = () => {
+      sessionStorage.removeItem('petId');
       navigate("/pet")
     }
-  
-    const handleSave = () => {
-    console.log('saving...', data);
-      fetch('http://localhost:8080/pet/d4c9b823-928a-453b-8163-5184843625cb', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((responseData) => console.log('Data saved:', responseData))
-        .catch((error) => console.error('Error saving data:', error));
+
+    const getPet = async () => {
+      try {
+          console.log('Fetching pet...');
+          const fetchUrl = 'http://localhost:8080/pet/' + sessionStorage.getItem('petId')
+          const response = await fetch(fetchUrl, {
+          headers: {
+              'Authorization': sessionStorage.getItem('token'),
+              'Content-Type': 'application/json', 
+              },
+          });
+          if (!response.ok) {
+              throw new Error('Failed to fetch pet data');
+          }
+          const fetchedData = await response.json();
+          console.log('pet data received:', fetchedData);
+          setData({
+              ...data,
+              name: fetchedData.payload.name,
+              typeOfAnimal: fetchedData.payload.typeOfAnimal,
+              dob: fetchedData.payload.dob,
+              gender:fetchedData.payload.gender,
+              photo:fetchedData.payload.photo,
+              clientRefId:fetchedData.payload.clientId,
+            });
+      } catch (error) {
+          console.error('Error during fetch:', error);
+      }
+  };
+
+    const handlePetSave = async(e) =>{
+      e.preventDefault()
+      const success = await savePet(data)
+      if(success){
+          console.log("pet details updated successfully!")
+          navigate("/pet")
+          // window.location.reload()
+          }else{
+              console.log("An error has occured!");
+              setErrorMessage("Unable to update user")
+          }
+          setTimeout(() => {
+              setErrorMessage("")
+          },4000)
+      }
+
+      const savePet = (data) => {
+        return new Promise((resolve) => {
+            console.log('updating pet...', data);
+            const fetchUrl = 'http://localhost:8080/pet/' + sessionStorage.getItem('petId')
+            fetch(fetchUrl, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('token'),
+              },
+              body: JSON.stringify(data),
+            })
+                .then((response) => {
+                  if(response.ok){
+                    resolve(true)
+                    response.json()
+                .then((responseData) => {
+                        console.log('pet data saved:', responseData)
+                  })}
+                  else {
+                    resolve(false)
+                  }
+              })
+              .catch((error) => console.error('Error saving data:', error));
+            });        
     };
   
+    useEffect(() => {
+      getPet();
+    }, []);
+
     return (
       <div>
         {/* <Button onClick={handleOpen}>Open modal</Button> */}
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-          <PetForm petData={data} onClose={handleClose} onChange={setData} onSave={handleSave} />
+          <PetForm petData={data} onClose={handleClose} onChange={setData} onSave={handlePetSave} />
         </Modal>
       </div>
     );

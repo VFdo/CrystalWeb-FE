@@ -33,8 +33,11 @@ const PetPage = () => {
 
   const navigate = useNavigate(null) 
 
-    const handleUpdateClick = () => {
-        navigate("/pet-update");
+    const handleUpdateClick = (petId) => {
+        sessionStorage.setItem('petId', petId);
+        setTimeout(() => {
+          navigate("/pet-update");
+      }, 1000);
     };
 
     const handleRecordsClick = () => {
@@ -134,15 +137,17 @@ useEffect(() => {
                   <Grid item key={pet.refId} xs={12} sm={6} md={4}>
                     <Card
                       sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                      onClick={handleUpdateClick}
                     >
                       <CardMedia
                         component="div"
                         sx={{
                           // 16:9
                           pt: '80.25%',
+                          cursor: 'pointer'
                         }}
                         image={pet.photo}
+          
+                        onClick={() => handleUpdateClick(pet.refId)}
                       />
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5" component="h2">
@@ -160,7 +165,6 @@ useEffect(() => {
                   ))}
                 </Grid>
                 </Container>
-          
       </Box>
 
 
