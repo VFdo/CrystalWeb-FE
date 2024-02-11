@@ -5,8 +5,9 @@ import Logo from '../../assets/logo.png'
 import { Button } from 'react-bootstrap'
 
 const NavBar = () => {
+    const userType = sessionStorage.getItem('role')
     const [showAccount, setShowAccount] = useState(false)
-
+    
     const handleAccountClick = () => {
         setShowAccount(!showAccount)
     }
@@ -16,6 +17,12 @@ const NavBar = () => {
     const handleAdminClick = () => {
         setshowAdmin(!showAdmin)
     }
+    const logout = () => {
+        sessionStorage.clear();
+        window.location.href = "/login";
+      };
+
+
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top '>
         <div className='container-fluid'>
@@ -50,7 +57,8 @@ const NavBar = () => {
                     <li className='nav-item'>
                         <NavLink className='nav-link' aria-current='page' to={"/contact-form"}>Contact</NavLink>
                     </li>
-                    
+                    {userType === 'ADMIN' && (
+                    <div>
                     <li className='nav-item dropdown'>
                         <a
                             className={`nav-link dropdown-toggle ${showAdmin ? "show":""}`}
@@ -78,6 +86,13 @@ const NavBar = () => {
                             </li>
                         </ul>
                     </li>
+                    </div> )}
+                    {userType === 'CLIENT' && (
+                    <div>
+                         <li className='nav-item'>
+                        <NavLink className='nav-link' aria-current='page' to={"/pet"}>Pets</NavLink>
+                    </li>
+                    </div>)}
                 </ul>
 
                 <ul className ='d-flex navbar-nav'>
@@ -108,7 +123,7 @@ const NavBar = () => {
                                 <Link to={"/profile"} className="dropdown-item">Profile</Link>
                             </li>
                             <li>
-                                <Link to={"/logout"} className="dropdown-item">Log Out</Link>
+                                <Link className="dropdown-item" onClick={logout}>Log Out</Link>
                             </li>
                         </ul>
                     </li>
