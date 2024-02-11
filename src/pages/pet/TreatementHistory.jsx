@@ -18,13 +18,12 @@ const styles = {
       },
 }
 
-//   TODO: change for Treatement History
-
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'dob', label: 'Date of Birth', minWidth: 100 },
-  { id: 'typeOfAnimal', label: 'Type of Animal', minWidth: 100 },
-  { id: 'photo', label: 'Photo', minWidth: 100 },
+  { id: 'date', label: 'Appointment Date', minWidth: 170 },
+  { id: 'treatment', label: 'Treatement Type', minWidth: 100 },
+  // TODO : set vet image
+  { id: 'VetId', label: 'Veterinarian', minWidth: 100 },
+  { id: 'reminderDate', label: 'Follow-up Date', minWidth: 100 },
 ];
 
 const TreatementHistory = () => {
@@ -45,14 +44,14 @@ const TreatementHistory = () => {
       const fetchAllPets = async () => {
         try{
           console.log('Fetching data...');
-        
-          const res = await fetch('http://localhost:8080/pet');
+        // TODO: Fix API - medical records for PET 
+          const res = await fetch('http://localhost:8080/medical-record');
           if (!res.ok) {
-            throw new Error('Failed to fetch pets');
+            throw new Error('Failed to fetch medical records');
           }
           const petData = await res.json();
           console.log('data: ', petData);
-          setData(petData);
+          setData(petData.payload);
         }catch (error) {
           console.error('Error fetching pets:', error);
         }
@@ -60,7 +59,6 @@ const TreatementHistory = () => {
       fetchAllPets();
     }, []);
     
-
   return (
     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} style={styles.tableContainer}>
         <Paper sx={{ width: '80%', overflow: 'hidden' }}>

@@ -1,62 +1,169 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import InboxIcon from '@mui/icons-material/Inbox';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
-const styles = {
-    formContainer: {
-        margin: 16,
-      },
-}
-const cards = [1, 2, 3];
-// const titleText = 'Doogo, 8'
-// const descriptionText = 'Next Appointment Date : yyyy-MM-DD'
-// const buttonLeft = 'Alerts'
-// const buttonRight = 'History'
-const PetPage = ({ props }) => {
-    console.log(props)
+
+
+const PetPage = () => {
+
+  function generate(element) {
+    return [0, 1, 2, 4, 5, 6, 7, 8, 9, 10].map((value) =>
+      React.cloneElement(element, {
+        key: value,
+      }),
+    );
+  }
+
+  const [pets, setPets] = useState([]);
+
+  const navigate = useNavigate(null) 
+
+    const handleUpdateClick = () => {
+        navigate("/pet-update");
+    };
+
+    const handleRecordsClick = () => {
+      navigate("/medical-records");
+    };
+
+  const getPets = async () => {
+    try {
+        console.log('Fetching pets...');
+        // TODO: fix API - pet for client
+        const fetchUrl = 'http://localhost:8080/pet' 
+        const response = await fetch(fetchUrl, {
+        headers: {
+            'Authorization': sessionStorage.getItem('token'),
+            'Content-Type': 'application/json', 
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const fetchedData = await response.json();
+        console.log('pet data received:', fetchedData);
+        const petData = fetchedData.payload.map(pet => ({
+          refId: pet.refId,
+          name: pet.name,
+          dob:pet.dob,
+          typeOfAnimal:pet.typeOfAnimal,
+          gender:pet.gender,
+          photo:"https://source.unsplash.com/random?pets&$" + pet.refId
+      }));
+      setPets(petData);
+    } catch (error) {
+        console.error('Error during fetch:', error);
+    }
+};
+
+useEffect(() => {
+  getPets();
+  }, []);
     return(
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} style={styles.formContainer}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                {/* <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                > */}
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia
-                        sx={{ height: 250 }}
-                        image="https://source.unsplash.com/random?wallpapers"
-                        title="green iguana"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div" align="center">
-                        value={props.titleText}
+      <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center', 
+        alignItems: 'center',  
+        '& > :not(style)': {
+          m: 1,
+          width: 800,
+          height: 800,
+        },
+      }}>
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              My Pets
+            </Typography>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              Recent updates...
+            </Typography>
+            <Stack
+              sx={{ pt: 2 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+               <Paper elevation={3}>
+               <List style={{ width: '400px', maxWidth: '400px', maxHeight: '400px', overflow: 'auto' }}>
+              {generate(
+                <ListItem>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Single-line item"
+                    secondary="new message..."
+                  />
+                </ListItem>,
+              )}
+            </List>
+               </Paper>
+              
+              {/* <Button variant="outlined">Secondary action</Button> */}
+            </Stack>
+          </Container>
+
+            <Container sx={{ py: 8 }} maxWidth="md">
+
+              {/* cards */}
+              <Grid container spacing={4}>
+                {pets.map((pet) => (
+                  <Grid item key={pet.refId} xs={12} sm={6} md={4}>
+                    <Card
+                      sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                    >
+                      <CardMedia
+                        component="div"
+                        sx={{
+                          // 16:9
+                          pt: '80.25%',
+                        }}
+                        image={pet.photo}
+                      />
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {pet.name}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" align="center">
-                        value={props.descriptionText}
+                        <Typography>
+                          Next Visit : 
                         </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">value={props.buttonLeft}</Button>
-                        <Button size="small">value={props.buttonRight}</Button>
-                    </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" onClick={handleRecordsClick}>Records</Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                  ))}
+                </Grid>
+                </Container>
+          
+      </Box>
+
+
+        
     );
 };
 
