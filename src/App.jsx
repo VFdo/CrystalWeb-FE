@@ -23,6 +23,7 @@ import PetPage from "./pages/pet/PetPage.jsx";
 import PetDetailsForm from "./pages/pet/PetDetailsForm.jsx";
 import TreatementHistory from "./pages/pet/TreatementHistory.jsx";
 import AddPetForm from "./pages/pet/AddPetForm.jsx";
+import ChatComponent from "./pages/pet/ChatComponent.jsx";
 
 
 function App() {  
@@ -51,7 +52,6 @@ function App() {
           <Route path="/medical-records" element={<TreatementHistory/>}/>
           <Route path="/pet-update" element={<PetDetailsForm/>}/>
           <Route path="/pet-add" element={<AddPetForm/>}/>
-
 
 
           

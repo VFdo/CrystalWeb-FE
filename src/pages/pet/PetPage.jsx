@@ -15,10 +15,11 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
-
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import ChatIcon from '@mui/icons-material/Chat';
 import Box from '@mui/material/Box';
+import ChatComponent from './ChatComponent';
 
 
 
@@ -33,6 +34,16 @@ const PetPage = () => {
   const[errorMessage, setErrorMessage] = useState("")
 
   const [pets, setPets] = useState([]);
+
+  const [open, setOpen] = useState(false);
+  const handleModalClose = () => {
+    sessionStorage.removeItem('petId');
+    setOpen(false);
+  };
+
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
 
   const navigate = useNavigate(null) 
 
@@ -49,6 +60,12 @@ const PetPage = () => {
 
     const handlePetClick = () => {
       navigate("/pet-add");
+    };
+
+    const handleChatClick = (petId) => {
+      sessionStorage.setItem('petId', petId);
+      handleModalOpen(true);
+      // navigate("/chat");
     };
       
   const getPets = async () => {
@@ -135,10 +152,7 @@ useEffect(() => {
               {/* <Button variant="outlined">Secondary action</Button> */}
             </Stack>
           </Container>
-
             <Container sx={{ py: 8 }} maxWidth="md">
-
-              {/* cards */}
               <Grid container spacing={4}>
                 {pets.map((pet) => (
                   <Grid item key={pet.refId} xs={12} sm={6} md={4}>
@@ -166,6 +180,15 @@ useEffect(() => {
                       </CardContent>
                       <CardActions>
                         <Button size="small" onClick={handleRecordsClick}>Records</Button>
+                        <div style={{ marginLeft: 'auto' }}></div>
+                        <Fab 
+                        size="small" 
+                        color="primary" 
+                        aria-label="add"
+                        onClick={() => handleChatClick(pet.refId)}
+                        >
+                          <ChatIcon />
+                        </Fab>
                       </CardActions>
                     </Card>
                   </Grid>
@@ -178,12 +201,9 @@ useEffect(() => {
                 sx={{ position: 'absolute', bottom: 30, right: 30 }}>
                 <AddIcon />
                 </Fab>
-                </Container>    
-                
+                </Container>   
+                {open && <ChatComponent open={open} handleClose={handleModalClose}/>} 
       </Box>
-
-
-        
     );
 };
 
