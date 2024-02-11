@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState , useEffect} from "react";
+import { useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/material';
@@ -102,7 +103,8 @@ const styles = {
 
   const PetDetailsForm = () => {
     const [data, setData] = useState({ name: '', animalType: '', dateOfBirth: '' });
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(true);
+    const open = true
   
     useEffect(() => {
       console.log('Fetching data...');
@@ -117,8 +119,12 @@ const styles = {
         });
     }, []);
   
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const navigate = useNavigate(null) 
+
+    // const handleOpen = () => setOpen(true);
+    const handleClose = () => {
+      navigate("/pet")
+    }
   
     const handleSave = () => {
     console.log('saving...', data);
@@ -136,7 +142,7 @@ const styles = {
   
     return (
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+        {/* <Button onClick={handleOpen}>Open modal</Button> */}
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
           <PetForm petData={data} onClose={handleClose} onChange={setData} onSave={handleSave} />
         </Modal>

@@ -48,7 +48,7 @@ function App() {
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/pet" element={<PetPage/>}/>
           <Route path="/medical-records" element={<TreatementHistory/>}/>
-          {/* <Route path="/pet-update" element={<TreatementHistory/>}/> */}
+          <Route path="/pet-update" element={<PetDetailsForm/>}/>
           
 
 
