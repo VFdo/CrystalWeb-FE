@@ -5,6 +5,7 @@ import {
   gridFilteredSortedRowIdsSelector,
   selectedGridRowsSelector,
 } from "@mui/x-data-grid";
+import InventoryDetailsView from "./InventoryDetailsView";
 
 const styles = {
   tableContainer: {
@@ -26,6 +27,7 @@ const getSelectedRowsToExport = ({ apiRef }) => {
 
 const InventoryHistory = () => {
   const [inventoryItems, setInventoryItems] = useState([]);
+  const [selectedInventory, setSelectedInventory] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,12 +58,16 @@ const InventoryHistory = () => {
     { field: "unitPrice", headerName: "Unit Price", width: 150 },
     { field: "status", headerName: "Status", width: 150 },
     { field: "expDate", headerName: "Expiry Date", width: 150 },
-    // supInfo fields here 
+    // supInfo fields here
     // { field: "supInfo.name", headerName: "Supplier Name", width: 200 },
     // { field: "supInfo.phone", headerName: "Supplier Phone", width: 150 },
     // { field: "supInfo.email", headerName: "Supplier Email", width: 200 },
     // { field: "supInfo.notes", headerName: "Supplier Notes", width: 200 },
   ];
+
+  const handleRowClick = (params) => {
+    setSelectedInventory(params.row);
+  };
 
   const getRowId = (row) => row.refId;
 
@@ -74,6 +80,7 @@ const InventoryHistory = () => {
           pageSize={10}
           rowsPerPageOptions={[5, 10, 20]}
           getRowId={getRowId}
+          onRowClick={handleRowClick}
           slots={{ toolbar: GridToolbar }}
           slotProps={{
             toolbar: {
@@ -82,6 +89,12 @@ const InventoryHistory = () => {
           }}
         />
       </div>
+      {selectedInventory && (
+        <InventoryDetailsView
+          inventory={selectedInventory}
+          onClose={() => setSelectedInventory(null)}
+        />
+      )}
     </div>
   );
 };
