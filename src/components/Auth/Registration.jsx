@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import { TextField, Button, Stack, Paper, Box } from '@mui/material';
+import { TextField, Button, Stack, Paper } from '@mui/material';
+import Box from '@mui/material/Box';
 
 const Registraion = () => {
     const[errorMessage, setErrorMessage] = useState("")
