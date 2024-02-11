@@ -15,12 +15,14 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
+
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 
 
 
 const PetPage = () => {
-
   function generate(element) {
     return [0, 1, 2, 4, 5, 6, 7, 8, 9, 10].map((value) =>
       React.cloneElement(element, {
@@ -28,6 +30,7 @@ const PetPage = () => {
       }),
     );
   }
+  const[errorMessage, setErrorMessage] = useState("")
 
   const [pets, setPets] = useState([]);
 
@@ -44,6 +47,10 @@ const PetPage = () => {
       navigate("/medical-records");
     };
 
+    const handlePetClick = () => {
+      navigate("/pet-add");
+    };
+      
   const getPets = async () => {
     try {
         console.log('Fetching pets...');
@@ -164,7 +171,15 @@ useEffect(() => {
                   </Grid>
                   ))}
                 </Grid>
-                </Container>
+                <Fab 
+                color="primary" 
+                aria-label="add"
+                onClick={handlePetClick}
+                sx={{ position: 'absolute', bottom: 30, right: 30 }}>
+                <AddIcon />
+                </Fab>
+                </Container>    
+                
       </Box>
 
 
