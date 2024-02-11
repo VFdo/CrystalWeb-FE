@@ -26,9 +26,21 @@ import PetPage from "./pages/pet/PetPage.jsx";
 import TreatementHistory from "./pages/pet/TreatementHistory.jsx";
 import AddPetForm from "./pages/pet/AddPetForm.jsx";
 import ChatComponent from "./pages/pet/ChatComponent.jsx";
+import Login from "./components/Auth/Login.Jsx";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#228B22', 
+      },
+    },
+  });
+
   return (
+    <ThemeProvider theme={theme}>
     <>
     <main>
       <Router>
@@ -59,8 +71,9 @@ function App() {
         </Routes>
       </Router>
     </main>
-    
+
     </>
+    </ThemeProvider>
   );
 }
 
