@@ -5,7 +5,9 @@ import Logo from '../../assets/logo.png'
 import { Button } from 'react-bootstrap'
 
 const NavBar = () => {
+    const userType = sessionStorage.getItem('role')
     const [showAccount, setShowAccount] = useState(false)
+
 
     const handleAccountClick = () => {
         setShowAccount(!showAccount)
@@ -16,6 +18,8 @@ const NavBar = () => {
     const handleAdminClick = () => {
         setshowAdmin(!showAdmin)
     }
+
+
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow sticky-top '>
         <div className='container-fluid'>
@@ -50,7 +54,8 @@ const NavBar = () => {
                     <li className='nav-item'>
                         <NavLink className='nav-link' aria-current='page' to={"/contact-form"}>Contact</NavLink>
                     </li>
-                    
+                    {userType === 'ADMIN' && (
+                    <div>
                     <li className='nav-item dropdown'>
                         <a
                             className={`nav-link dropdown-toggle ${showAdmin ? "show":""}`}
@@ -78,6 +83,13 @@ const NavBar = () => {
                             </li>
                         </ul>
                     </li>
+                    </div> )}
+                    {userType === 'CLIENT' && (
+                    <div>
+                         <li className='nav-item'>
+                        <NavLink className='nav-link' aria-current='page' to={"/pet"}>Pets</NavLink>
+                    </li>
+                    </div>)}
                 </ul>
 
                 <ul className ='d-flex navbar-nav'>
