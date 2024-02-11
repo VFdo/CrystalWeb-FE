@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import Talk from 'talkjs';
 import { Session, Chatbox } from '@talkjs/react';
 import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 const ChatComponent = ({ open, handleClose }) => {

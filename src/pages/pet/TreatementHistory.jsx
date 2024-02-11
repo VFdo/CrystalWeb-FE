@@ -43,7 +43,7 @@ const TreatementHistory = () => {
     useEffect(() => {
       const fetchAllPets = async () => {
         try{
-          console.log('Fetching data...');
+          console.log('Fetching pet data...');
         // TODO: Fix API - medical records for PET 
           const res = await fetch('http://localhost:8080/medical-record');
           if (!res.ok) {
@@ -58,7 +58,7 @@ const TreatementHistory = () => {
       };
       fetchAllPets();
     }, []);
-    
+
   return (
     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} style={styles.tableContainer}>
         <Paper sx={{ width: '80%', overflow: 'hidden' }}>

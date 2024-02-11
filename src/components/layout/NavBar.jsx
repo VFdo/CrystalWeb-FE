@@ -7,8 +7,7 @@ import { Button } from 'react-bootstrap'
 const NavBar = () => {
     const userType = sessionStorage.getItem('role')
     const [showAccount, setShowAccount] = useState(false)
-
-
+    
     const handleAccountClick = () => {
         setShowAccount(!showAccount)
     }
@@ -18,6 +17,10 @@ const NavBar = () => {
     const handleAdminClick = () => {
         setshowAdmin(!showAdmin)
     }
+    const logout = () => {
+        sessionStorage.clear();
+        window.location.href = "/login";
+      };
 
 
   return (
@@ -120,7 +123,7 @@ const NavBar = () => {
                                 <Link to={"/profile"} className="dropdown-item">Profile</Link>
                             </li>
                             <li>
-                                <Link to={"/logout"} className="dropdown-item">Log Out</Link>
+                                <Link className="dropdown-item" onClick={logout}>Log Out</Link>
                             </li>
                         </ul>
                     </li>

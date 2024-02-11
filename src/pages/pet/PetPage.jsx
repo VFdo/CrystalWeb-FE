@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+// import ListItem from '@mui/material/ListItem';
 import InboxIcon from '@mui/icons-material/Inbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -18,32 +18,83 @@ import Paper from '@mui/material/Paper';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import ChatIcon from '@mui/icons-material/Chat';
+import ListSubheader from '@mui/material/ListSubheader';
+import ListItemButton from '@mui/material/ListItemButton';
+import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ChatComponent from './ChatComponent';
 
-
+const styles = {
+  modalBox: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    border: '0px solid #000',
+    boxShadow: 24,
+    p: 5,
+  },
+}
 
 const PetPage = () => {
-  function generate(element) {
-    return [0, 1, 2, 4, 5, 6, 7, 8, 9, 10].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      }),
-    );
-  }
+  
   const[errorMessage, setErrorMessage] = useState("")
 
   const [pets, setPets] = useState([]);
 
+  // chat modal
   const [open, setOpen] = useState(false);
   const handleModalClose = () => {
     sessionStorage.removeItem('petId');
     setOpen(false);
   };
-
   const handleModalOpen = () => {
     setOpen(true);
   };
+
+  // inbox modal
+  const [openMessage, setOpenMessage] = useState(false);
+  const [mTitle, setmTitle] = useState('')
+  const [mBody, setmBody] = useState('')
+  const handleMessageModalClose = () => {
+    setOpenMessage(false);
+  };
+
+  const messages = [
+    { 
+        title: 'Reminder: Annual Vaccination Due',
+        body: 'Dear Pet Owner, This is a reminder that your pet is due for its annual vaccination. Please schedule an appointment with our clinic at your earliest convenience.'
+    },
+    { 
+        title: 'Upcoming Appointment: Dental Checkup',
+        body: 'Dear Pet Owner, Just a reminder that your pet has an upcoming dental checkup appointment scheduled for next week. Please ensure your pet is prepared for the visit.'
+    },
+    { 
+        title: 'Important Information: Flea & Tick Season',
+        body: 'Dear Pet Owner, As we approach flea and tick season, it\'s crucial to ensure your pet is protected. We recommend discussing preventative measures during your next visit.'
+    },
+    { 
+        title: 'Emergency Preparedness: Pet First Aid',
+        body: 'Dear Pet Owner, In case of emergencies, it\'s essential to have basic pet first aid knowledge. We encourage you to attend our upcoming workshop on pet first aid and CPR.'
+    },
+    { 
+        title: 'Holiday Hours Notice',
+        body: 'Dear Pet Owner, Please note that our clinic will have modified hours during the upcoming holiday season. We appreciate your understanding and cooperation.'
+    }
+];
+
+// function generate({title, body}) {
+//   return messages.map((message) =>
+//    {
+//       key: message.title,
+//         title: {title},
+//         body: {body}, 
+//    }
+//   );
+// }
+
 
   const navigate = useNavigate(null) 
 
@@ -67,6 +118,12 @@ const PetPage = () => {
       handleModalOpen(true);
       // navigate("/chat");
     };
+
+    const handleListItemClick = (mTitle, mBody) => {
+      setmTitle(mTitle);
+      setmBody(mBody);
+      setOpenMessage(true);
+    }
       
   const getPets = async () => {
     try {
@@ -124,9 +181,9 @@ useEffect(() => {
             >
               My Pets
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            {/* <Typography variant="h5" align="center" color="text.secondary" paragraph>
               Recent updates...
-            </Typography>
+            </Typography> */}
             <Stack
               sx={{ pt: 2 }}
               direction="row"
@@ -134,21 +191,22 @@ useEffect(() => {
               justifyContent="center"
             >
                <Paper elevation={3}>
-               <List style={{ width: '400px', maxWidth: '400px', maxHeight: '400px', overflow: 'auto' }}>
-              {generate(
-                <ListItem>
+               <List style={{ width: '400px', maxWidth: '400px', maxHeight: '400px', overflow: 'auto' }}
+               subheader={<ListSubheader color='primary'>Messages</ListSubheader>}
+               >
+              {messages.map((message) => (
+                <ListItemButton item key={message.title} onClick={() => handleListItemClick(message.title, message.body)}>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Single-line item"
-                    secondary="new message..."
+                    primary={message.title}
+                    secondary={message.body}
                   />
-                </ListItem>,
-              )}
+                </ListItemButton>
+              ))}
             </List>
                </Paper>
-              
               {/* <Button variant="outlined">Secondary action</Button> */}
             </Stack>
           </Container>
@@ -175,7 +233,7 @@ useEffect(() => {
                           {pet.name}
                         </Typography>
                         <Typography>
-                          Next Visit : 
+                          Next Visit : {pet.dob}
                         </Typography>
                       </CardContent>
                       <CardActions>
@@ -201,7 +259,18 @@ useEffect(() => {
                 sx={{ position: 'absolute', bottom: 30, right: 30 }}>
                 <AddIcon />
                 </Fab>
-                </Container>   
+                </Container>  
+                <Modal open={openMessage} onClose={handleMessageModalClose}>
+                {/* <Box> */}
+                <Paper 
+                elevation={3}
+                sx={styles.modalBox}>
+                <h2>{mTitle}</h2>
+                  <p>{mBody}</p>
+                </Paper>
+                  
+                {/* </Box> */}
+              </Modal> 
                 {open && <ChatComponent open={open} handleClose={handleModalClose}/>} 
       </Box>
     );
