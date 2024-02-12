@@ -28,6 +28,7 @@ import AddPetForm from "./pages/pet/AddPetForm.jsx";
 import ChatComponent from "./pages/pet/ChatComponent.jsx";
 import Login from "./components/Auth/Login.Jsx";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Footer from "./components/layout/Footer.jsx";
 
 
 function App() {
@@ -69,9 +70,10 @@ function App() {
 
           
         </Routes>
+        <Footer/>
       </Router>
     </main>
-
+    
     </>
     </ThemeProvider>
   );

@@ -20,9 +20,7 @@ const homepage = () => {
           <CounterAnimation/>
           <ContactForm/>
           <Parallax/>
-          <TestiMonials/>
-          <Footer/>
-          
+          <TestiMonials/>          
           
       </section>
     </section>
