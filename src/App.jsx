@@ -13,13 +13,10 @@ import HospitalServices from "./components/common/HospitalServices";
 import ContactForm from "./ContactUs/ContactForm";
 import AboutUs from "./components/common/AboutUs";
 import ContactSucess from "./ContactUs/ContactSucess";
-import AppointmentForm from "./components/Appointment/AppointmentDetailsForm.jsx";
-import ExistingAppointments from "./components/Appointment/ExistingAppointments";
+
 import TestiMonials from "./components/Testimonials/TestiMonials";
 import Registraion from "./components/Auth/Registration.jsx";
 import Profile from "./components/Auth/Profile.jsx";
-import AttendanceForm from "./components/Attendance/AttendanceForm.jsx";
-import AppointmentHistory from "./pages/pet/AppointmentHistory.jsx";
 import AttendancePage from "./components/Attendance/AttendancePage.jsx";
 import PetDetailsForm from "./pages/pet/PetDetailsForm.jsx";
 import PetPage from "./pages/pet/PetPage.jsx";
