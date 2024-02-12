@@ -49,7 +49,7 @@ const addProducts = () => {
         setErrorMessage("Error Adding a Product")
       }
     }catch(error){
-      setErrorMessage(error.message)
+      // setErrorMessage()
     }
     setTimeout(()=> {
       setSuccessMessage("")

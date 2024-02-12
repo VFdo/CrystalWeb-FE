@@ -84,6 +84,9 @@ const NavBar = () => {
                             <li>
                                 <Link to={"/existing-appointments"} className="dropdown-item">View Appointments</Link>
                             </li>
+                            <li>
+                                <Link to={"/attendance-veiw"} className="dropdown-item">View Attendance</Link>
+                            </li>
                         </ul>
                     </li>
                     </div> )}

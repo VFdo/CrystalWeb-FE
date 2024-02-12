@@ -27,10 +27,11 @@ import TreatementHistory from "./pages/pet/TreatementHistory.jsx";
 import AddPetForm from "./pages/pet/AddPetForm.jsx";
 import ChatComponent from "./pages/pet/ChatComponent.jsx";
 import AppointmentDetailsForm from "./components/Appointment/AppointmentDetailsForm.jsx";
-import Login from "./components/Auth/Login.Jsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./components/layout/Footer.jsx";
 import ShopHomePage from "./components/Home/ShopHomePage";
+import Login from "./components/Auth/Login.Jsx";
+import AttendanceSheet from "./components/Attendance/AttendanceSheet.jsx";
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           <Route path="/medical-records" element={<TreatementHistory/>}/>
           <Route path="/pet-update" element={<PetDetailsForm/>}/>
           <Route path="/pet-add" element={<AddPetForm/>}/>
+          <Route path="/attendance-veiw" element={<AttendanceSheet/>}/>
         </Routes>
       </Router>
     </main>

@@ -51,7 +51,7 @@ const AttendanceSheet = () => {
         }
         const petData = await res.json();
         console.log("data: ", petData);
-        setData(petData);
+        setData(petData.payload);
       } catch (error) {
         console.error("Error fetching pets:", error);
       }
