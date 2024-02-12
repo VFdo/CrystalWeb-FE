@@ -16,6 +16,7 @@ import ContactSucess from "./ContactUs/ContactSucess"
 import AppointmentForm from "./components/Appointment/AppointmentForm";
 import ExistingAppointments from "./components/Appointment/ExistingAppointments";
 import TestiMonials from "./components/Testimonials/TestiMonials";
+import ShopHomePage from "./components/Home/ShopHomePage";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
           <Route path="/book-appointment" element={<AppointmentForm/>}/>
           <Route path="/existing-appointments" element={<ExistingAppointments/>}/>
           <Route path="/products/all-products" element={<ProductListing/>}/>
-      
+          <Route path="/shop" element={<ShopHomePage/>}/>
           <Route path="/about-us" element={<AboutUs/>}/>
           <Route path="/contact-form" element={<ContactForm/>}/>
           <Route path="/testimonials" element={<TestiMonials/>}/>

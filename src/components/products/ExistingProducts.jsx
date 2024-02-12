@@ -136,7 +136,7 @@ const currentProducts = filteredProducts.slice(indexofFirstProduct, indexofLastP
         </section>
    
         </>
-    )
+    
        
     </>
   )
