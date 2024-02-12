@@ -19,6 +19,14 @@ import TestiMonials from "./components/Testimonials/TestiMonials";
 import Login from "./components/Auth/Login.jsx";
 import Registraion from "./components/Auth/Registration.jsx";
 import Profile from "./components/Auth/Profile.jsx";
+import InventoryHistory from "./pages/inventory/InventoryHistory.jsx";
+import InventoryDetailsForm from "./pages/inventory/InventoryDetailsForm.jsx";
+import AdminView from "./pages/employee/AdminView.jsx";
+import EmployeeHistory from "./pages/employee/EmployeeHistory.jsx";
+import EmployeeDetailsForm from "./pages/employee/EmployeeDetailsForm.jsx";
+import BillHistory from "./pages/bill/BillHistory.jsx";
+import AttendanceHistory from "./pages/employee/AttendanceHistory.jsx";
+import BillDetailsForm from "./pages/bill/BillDetailsForm.jsx";
 
 
 function App() {  
@@ -43,6 +51,15 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Registraion/>}/>
           <Route path="/profile" element={<Profile/>}/>
+          <Route path="/employee-create" element={<EmployeeDetailsForm/>}/>
+          <Route path="/employee-update" element={<EmployeeDetailsForm/>}/>
+          <Route path="/employee-history" element={<EmployeeHistory/>}/>
+          <Route path="/bill-create" element={<BillDetailsForm/>}/>
+          <Route path="/bill-update" element={<BillDetailsForm/>}/>
+          <Route path="/bill-history" element={<BillHistory/>}/>
+          <Route path="/inventory-create" element={<InventoryDetailsForm/>}/>
+          <Route path="/inventory-update" element={<InventoryDetailsForm/>}/>
+          <Route path="/inventory-history" element={<InventoryHistory/>}/>
           
 
 
