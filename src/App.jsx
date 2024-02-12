@@ -30,9 +30,9 @@ import AppointmentDetailsForm from "./components/Appointment/AppointmentDetailsF
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./components/layout/Footer.jsx";
 import ShopHomePage from "./components/Home/ShopHomePage";
-import Login from "./components/Auth/Login.Jsx";
+import Login from "./components/Auth/Login.jsx";
 import AttendanceSheet from "./components/Attendance/AttendanceSheet.jsx";
-
+import AppointmentsTable from "./components/Appointment/AppointmentsTable.jsx";
 
 function App() {
   const theme = createTheme({
@@ -45,37 +45,49 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <>
-    <main>
-      <Router>
-        <NavBar/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/edit-product/:productId" element={<EditProduct/>}/>
-          <Route path="/existing-products" element={<ExistingProducts/>}/>
-          <Route path="/add-product" element={<AddProduct/>}/>
-          <Route path="/hospital-services" element={<HospitalServices/>}/>
-          <Route path="/book-appointment" element={<AppointmentDetailsForm/>}/>
-          <Route path="/existing-appointments" element={<ExistingAppointments/>}/>
-          <Route path="/products/all-products" element={<ProductListing/>}/>
-          <Route path="/shop" element={<ShopHomePage/>}/>
-          <Route path="/about-us" element={<AboutUs/>}/>
-          <Route path="/contact-form" element={<ContactForm/>}/>
-          <Route path="/testimonials" element={<TestiMonials/>}/>
-          <Route path="/message-success" element={<ContactSucess/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Registraion/>}/>
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/pet" element={<PetPage/>}/>
-          <Route path="/medical-records" element={<TreatementHistory/>}/>
-          <Route path="/pet-update" element={<PetDetailsForm/>}/>
-          <Route path="/pet-add" element={<AddPetForm/>}/>
-          <Route path="/attendance-veiw" element={<AttendanceSheet/>}/>
-        </Routes>
-      </Router>
-    </main>
-    
-    </>
+      <>
+        <main>
+          <Router>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/edit-product/:productId"
+                element={<EditProduct />}
+              />
+              <Route path="/existing-products" element={<ExistingProducts />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/hospital-services" element={<HospitalServices />} />
+              <Route
+                path="/book-appointment"
+                element={<AppointmentDetailsForm />}
+              />
+              <Route
+                path="/existing-appointments"
+                element={<AppointmentsTable />}
+              />
+              <Route
+                path="/products/all-products"
+                element={<ProductListing />}
+              />
+              <Route path="/shop" element={<ShopHomePage />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact-form" element={<ContactForm />} />
+              <Route path="/testimonials" element={<TestiMonials />} />
+              <Route path="/message-success" element={<ContactSucess />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Registraion />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/pet" element={<PetPage />} />
+              <Route path="/medical-records" element={<TreatementHistory />} />
+              <Route path="/pet-update" element={<PetDetailsForm />} />
+              <Route path="/pet-add" element={<AddPetForm />} />
+              <Route path="/attendance-veiw" element={<AttendanceSheet />} />
+              <Route path="/attendance-form" element={<AttendancePage />} />
+            </Routes>
+          </Router>
+        </main>
+      </>
     </ThemeProvider>
   );
 }

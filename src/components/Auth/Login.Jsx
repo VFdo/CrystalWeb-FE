@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import { green } from '@mui/material/colors';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import { green } from "@mui/material/colors";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -119,9 +119,14 @@ const Login = () => {
               </button>
               <br></br>
               <br></br>
-              <span style={{ marginLeft: "0px", color:green}}>
+              <span style={{ marginLeft: "0px", color: green }}>
                 Don't have an account?
-                <Link to={"/register"} style={{ color: 'green', textDecoration: 'none' }}>Register Here</Link>
+                <Link
+                  to={"/register"}
+                  style={{ color: "green", textDecoration: "none" }}
+                >
+                  Register Here
+                </Link>
               </span>
             </div>
           </form>

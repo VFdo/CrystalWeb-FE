@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { addAttendance } from "../utils/ApiFunctions";
 import { Form, Row, Card, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Header from "../common/Header";

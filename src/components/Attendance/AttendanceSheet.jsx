@@ -21,9 +21,9 @@ const styles = {
 //   TODO: change for Appointment History
 
 const columns = [
-  { id: "employeeID", label: "EmployeeID", minWidth: 170 },
+  { id: "employeeRefId", label: "EmployeeID", minWidth: 170 },
   { id: "date", label: "Check-in Date", minWidth: 100 },
-  { id: "time", label: "Check-in Time", minWidth: 100 },
+  { id: "inTime", label: "Check-in Time", minWidth: 100 },
 ];
 
 const AttendanceSheet = () => {

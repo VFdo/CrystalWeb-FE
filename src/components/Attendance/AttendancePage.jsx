@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { addAttendance } from "../utils/ApiFunctions";
-import { Form, Row, Card, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import Header from "../common/Header";
 import { useNavigate } from "react-router-dom";
 
 import AttendanceForm from "./AttendanceForm";
@@ -32,6 +28,7 @@ const AttendancePage = () => {
     const success = await saveAttendance(newAttendance);
     if (success) {
       console.log("attendance details saved successfully!");
+      //await sendEmail(emailData);
       navigate("/attendance");
       // window.location.reload()
     } else {
@@ -68,13 +65,57 @@ const AttendancePage = () => {
     });
   };
 
+  const sendEmail = (emailData) => {
+    return new Promise((resolve) => {
+      console.log("sending email...", emailData);
+      fetch("http://localhost:8080/mail/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: sessionStorage.getItem("token"),
+        },
+        body: JSON.stringify(emailData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            resolve(true);
+            response.json().then((responseData) => {
+              console.log("email sent:", responseData);
+            });
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((error) => console.error("Error sending email:", error));
+    });
+  };
+
+  // Example usage:
+  const newEmail = {
+    file: null,
+    reciever: "janithkulatunge@gmail.com",
+    //cc: "janithkulatunge@gmail.com",
+    subject: "Email Subject",
+    body: "Email Body",
+  };
+
+  sendEmail(newEmail)
+    .then((success) => {
+      if (success) {
+        console.log("Email sent successfully!");
+      } else {
+        console.log("Failed to send email.");
+      }
+    })
+    .catch((error) => console.error("Error:", error));
+
   return (
     <div>
       <AttendanceForm
         attendanceData={newAttendance}
         onClose={handleClose}
         onChange={setAttendance}
-        onSave={handleAttendanceSave}
+        onSave={[handleAttendanceSave, sendEmail]}
       />
     </div>
   );
