@@ -4,60 +4,30 @@ import { Form, Row, Card, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Header from "../common/Header";
 
-const AttendanceForm = () => {
-  const [booking, setBooking] = useState({
-    employeeID: "",
-    password: "",
-    checkInDate: "",
-    checkInTime: "",
-  });
-  const [bookingInfo, setBookingInfo] = useState({
-    employeeID: "",
-    password: "",
-    checkInDate: "",
-    checkInTime: "",
-  });
-
-  const [successMessage, setSuccessMessage] = useState("");
+const AttendanceForm = ({ attendanceData, onClose, onChange, onSave }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleEmployeeIDChange = (event) => {
+    onChange({ ...attendanceData, employeeRefId: event.target.value });
+  };
+  const handlePasswordChange = (event) => {
+    onChange({ ...attendanceData, password: event.target.value });
+  };
+  const handleDateChange = (event) => {
+    onChange({ ...attendanceData, date: event.target.value });
+  };
+
+  const handleTimeChange = (event) => {
+    onChange({ ...attendanceData, inTime: event.target.value });
+  };
   const handleProductInputChange = (e) => {
-    const name = e.target.name;
-    let value = e.target.value;
-
-    setBooking({ ...booking, [name]: value });
+    onChange({ ...attendanceData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const success = await addAttendance(
-        booking.employeeID,
-        booking.password,
-        booking.checkInDate,
-        booking.checkInTime
-      );
-      if (success !== undefined) {
-        setSuccessMessage("Your attendance has been recorded");
-        setBooking({
-          employeeID: "",
-          password: "",
-          checkInDate: "",
-          checkInTime: "",
-        });
-
-        setErrorMessage("");
-      } else {
-        setErrorMessage("Error in Attendance registration");
-      }
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
-    setTimeout(() => {
-      setSuccessMessage("");
-      setErrorMessage("");
-    }, 3000);
-  };
+  //   const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     onSave(); // Assuming onSave is supposed to handle form submission
+  //   };
 
   return (
     <>
@@ -86,27 +56,17 @@ const AttendanceForm = () => {
                   </Card.Title>
                   <Card.Text>
                     <div>
-                      {successMessage && (
-                        <div className="alert alert-sucess fade show">
-                          {successMessage}
-                        </div>
-                      )}
-                      {errorMessage && (
-                        <div className="alert alert-danger fade show">
-                          {errorMessage}
-                        </div>
-                      )}
-                      <Form onSubmit={handleSubmit}>
+                      <Form>
                         <Form.Group>
-                          <Form.Label htmlFor="employeeID">
+                          <Form.Label htmlFor="employeeRefId">
                             Employee ID :{" "}
                           </Form.Label>
                           <Form.Control
                             required
                             type="text"
-                            id="employeeID"
-                            name="employeeID"
-                            value={booking.employeeID}
+                            id="employeeRefId"
+                            name="employeeRefId"
+                            value={attendanceData.employeeRefId}
                             placeholder="Enter Employee ID"
                             onChange={handleProductInputChange}
                           />
@@ -125,7 +85,7 @@ const AttendanceForm = () => {
                             type="text"
                             id="password"
                             name="password"
-                            value={booking.password}
+                            value={attendanceData.password}
                             placeholder="Enter Your Employee Password"
                             onChange={handleProductInputChange}
                           />
@@ -140,15 +100,16 @@ const AttendanceForm = () => {
                           </legend>
                           <div className="row">
                             <div className="col-6">
-                              <Form.Label htmlFor="checkInDate">
+                              <Form.Label htmlFor="date">
                                 Check-In Date :{" "}
                               </Form.Label>
                               <Form.Control
                                 required
                                 type="date"
-                                id="checkInDate"
-                                name="checkInDate"
+                                id="date"
+                                name="date"
                                 placeholder="Check In date"
+                                value={attendanceData.date}
                                 onChange={handleProductInputChange}
                               />
 
@@ -158,15 +119,16 @@ const AttendanceForm = () => {
                             </div>
 
                             <div className="col-6">
-                              <Form.Label htmlFor="checkInTime">
+                              <Form.Label htmlFor="inTime">
                                 Check-In Time :{" "}
                               </Form.Label>
                               <Form.Control
                                 required
                                 type="time"
-                                id="checkInTime"
-                                name="checkInTime"
+                                id="inTime"
+                                name="inTime"
                                 placeholder="Check In Time"
+                                value={attendanceData.inTime}
                                 onChange={handleProductInputChange}
                               />
 
@@ -184,7 +146,11 @@ const AttendanceForm = () => {
 
                         <div className="d-grid d-md-flex gap-3 mt-3">
                           <NavLink className="nav-link mt-5" to={"/admin"}>
-                            <Button variant="outline-success" className="/">
+                            <Button
+                              variant="outline-success"
+                              className="/"
+                              onClick={onClose}
+                            >
                               Back
                             </Button>
                           </NavLink>
@@ -192,6 +158,7 @@ const AttendanceForm = () => {
                             variant="outline-success"
                             className="login mt-5"
                             type="submit"
+                            onClick={onSave}
                           >
                             Submit Attendance
                           </Button>
