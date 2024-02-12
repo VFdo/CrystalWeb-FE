@@ -30,6 +30,8 @@ import AppointmentDetailsForm from "./components/Appointment/AppointmentDetailsF
 import Login from "./components/Auth/Login.Jsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./components/layout/Footer.jsx";
+import ShopHomePage from "./components/Home/ShopHomePage";
+
 
 function App() {
   const theme = createTheme({
@@ -55,6 +57,7 @@ function App() {
           <Route path="/book-appointment" element={<AppointmentDetailsForm/>}/>
           <Route path="/existing-appointments" element={<ExistingAppointments/>}/>
           <Route path="/products/all-products" element={<ProductListing/>}/>
+          <Route path="/shop" element={<ShopHomePage/>}/>
           <Route path="/about-us" element={<AboutUs/>}/>
           <Route path="/contact-form" element={<ContactForm/>}/>
           <Route path="/testimonials" element={<TestiMonials/>}/>
