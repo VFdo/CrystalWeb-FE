@@ -48,6 +48,7 @@ const PetPage = () => {
   const [open, setOpen] = useState(false);
   const handleModalClose = () => {
     sessionStorage.removeItem('petId');
+    sessionStorage.removeItem('petName');
     setOpen(false);
   };
   const handleModalOpen = () => {
@@ -113,8 +114,9 @@ const PetPage = () => {
       navigate("/pet-add");
     };
 
-    const handleChatClick = (petId) => {
+    const handleChatClick = (petId, petName) => {
       sessionStorage.setItem('petId', petId);
+      sessionStorage.setItem('petName', petName);
       handleModalOpen(true);
       // navigate("/chat");
     };
@@ -243,7 +245,7 @@ useEffect(() => {
                         size="small" 
                         color="primary" 
                         aria-label="add"
-                        onClick={() => handleChatClick(pet.refId)}
+                        onClick={() => handleChatClick(pet.refId, pet.name)}
                         >
                           <ChatIcon />
                         </Fab>
@@ -271,7 +273,7 @@ useEffect(() => {
                   
                 {/* </Box> */}
               </Modal> 
-                {open && <ChatComponent open={open} handleClose={handleModalClose}/>} 
+                {open && <ChatComponent open={open} handleClose={handleModalClose} petId={sessionStorage.getItem('petId')} petName={sessionStorage.getItem('petName')}/>} 
       </Box>
     );
 };

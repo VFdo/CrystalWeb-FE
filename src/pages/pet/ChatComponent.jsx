@@ -5,35 +5,37 @@ import { Session, Chatbox } from '@talkjs/react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
-const ChatComponent = ({ open, handleClose }) => {
+const ChatComponent = ({ open, handleClose, petId, petName }) => {
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
+  const id = petId.toString();
+  const name = petName.toString();
   
   const syncUser = useCallback(
     () =>
       new Talk.User({
-        id: '0000',
-        name: 'Vidu',
+        id: id, 
+        name: name + ' \'s ownwer',
         email: 'vidufernando98@gmail.com',
-        photoUrl: 'https://unsplash.com/photos/starry-night-sky-over-the-starry-night-lLFZhRYGgI4',
-        welcomeMessage: 'Hellooo :)',
-        role: 'admin',
+        photoUrl: 'https://source.unsplash.com/random?pets',
+        welcomeMessage: name + ' says hi!',
+        role: 'user',
       }),
     []
   );
 
   const syncConversation = useCallback((session) => {
     // JavaScript SDK code here
-    const conversation = session.getOrCreateConversation('welcome');
+    const conversation = session.getOrCreateConversation('welcome' + id);
 
     const other = new Talk.User({
       id: 'frank',
-      name: 'Frank',
+      name: 'Vet',
       email: 'frank@example.com',
-      photoUrl: 'https://talkjs.com/new-web/avatar-8.jpg',
+      photoUrl: 'https://talkjs.com/new-web/avatar-10.jpg',
       welcomeMessage: 'Hey, how can I help?',
-      role: 'default',
+      role: 'admin',
     });
     conversation.setParticipant(session.me);
     conversation.setParticipant(other);
@@ -45,7 +47,8 @@ const ChatComponent = ({ open, handleClose }) => {
     
     <Session appId="t19q4LjZ" syncUser={syncUser}>
       <Modal
-        open={open} onClose={handleClose}
+        open={open} 
+        onClose={handleClose}
         closeOnClickBackdrop={true}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

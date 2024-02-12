@@ -216,7 +216,7 @@ return(
                 <Button variant="outlined" color="primary" type="submit">Register</Button>
             </form>
             <br></br>
-            <small>Already have an account? <Link to="/login">Login Here</Link></small>
+            <small>Already have an account? <Link to="/login" style={{ color: 'green', textDecoration: 'none' }}>Login Here</Link></small>
      
         </React.Fragment>
         </Paper>

@@ -27,43 +27,62 @@ import TreatementHistory from "./pages/pet/TreatementHistory.jsx";
 import AddPetForm from "./pages/pet/AddPetForm.jsx";
 import ChatComponent from "./pages/pet/ChatComponent.jsx";
 import AppointmentDetailsForm from "./components/Appointment/AppointmentDetailsForm.jsx";
+import Login from "./components/Auth/Login.Jsx";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Footer from "./components/layout/Footer.jsx";
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#228B22",
+      },
+    },
+  });
+
   return (
-    <>
-      <main>
-        <Router>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/edit-product/:productId" element={<EditProduct />} />
-            <Route path="/existing-products" element={<ExistingProducts />} />
-            <Route path="/add-product" element={<AddProduct />} />
-            <Route path="/hospital-services" element={<HospitalServices />} />
-            <Route
-              path="/book-appointment"
-              element={<AppointmentDetailsForm />}
-            />
-            <Route
-              path="/existing-appointments"
-              element={<ExistingAppointments />}
-            />
-            <Route path="/products/all-products" element={<ProductListing />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact-form" element={<ContactForm />} />
-            <Route path="/testimonials" element={<TestiMonials />} />
-            <Route path="/message-success" element={<ContactSucess />} />
-            {/* <Route path="/login" element={<Login/>}/> */}
-            <Route path="/register" element={<Registraion />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/pet" element={<PetPage />} />
-            <Route path="/medical-records" element={<TreatementHistory />} />
-            <Route path="/pet-update" element={<PetDetailsForm />} />
-            <Route path="/pet-add" element={<AddPetForm />} />
-          </Routes>
-        </Router>
-      </main>
-    </>
+    <ThemeProvider theme={theme}>
+      <>
+        <main>
+          <Router>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/edit-product/:productId"
+                element={<EditProduct />}
+              />
+              <Route path="/existing-products" element={<ExistingProducts />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/hospital-services" element={<HospitalServices />} />
+              <Route
+                path="/book-appointment"
+                element={<AppointmentDetailsForm />}
+              />
+              <Route
+                path="/existing-appointments"
+                element={<ExistingAppointments />}
+              />
+              <Route
+                path="/products/all-products"
+                element={<ProductListing />}
+              />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact-form" element={<ContactForm />} />
+              <Route path="/testimonials" element={<TestiMonials />} />
+              <Route path="/message-success" element={<ContactSucess />} />
+              {/* <Route path="/login" element={<Login/>}/> */}
+              <Route path="/register" element={<Registraion />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/pet" element={<PetPage />} />
+              <Route path="/medical-records" element={<TreatementHistory />} />
+              <Route path="/pet-update" element={<PetDetailsForm />} />
+              <Route path="/pet-add" element={<AddPetForm />} />
+            </Routes>
+          </Router>
+        </main>
+      </>
+    </ThemeProvider>
   );
 }
 
