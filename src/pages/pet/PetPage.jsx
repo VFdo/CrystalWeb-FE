@@ -23,6 +23,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ChatComponent from './ChatComponent';
+import Footer from '../../components/layout/Footer';
 
 const styles = {
   modalBox: {
@@ -130,7 +131,6 @@ const PetPage = () => {
   const getPets = async () => {
     try {
         console.log('Fetching pets...');
-        // TODO: fix API - pet for client
         const fetchUrl = 'http://localhost:8080/pet' 
         const response = await fetch(fetchUrl, {
         headers: {
@@ -161,6 +161,7 @@ useEffect(() => {
   getPets();
   }, []);
     return(
+      <section>
       <Box
       sx={{
         display: 'flex',
@@ -194,7 +195,7 @@ useEffect(() => {
             >
                <Paper elevation={3}>
                <List style={{ width: '400px', maxWidth: '400px', maxHeight: '400px', overflow: 'auto' }}
-               subheader={<ListSubheader color='primary'>Messages</ListSubheader>}
+               subheader={<ListSubheader color='primary'>Notifications</ListSubheader>}
                >
               {messages.map((message) => (
                 <ListItemButton item key={message.title} onClick={() => handleListItemClick(message.title, message.body)}>
@@ -274,7 +275,10 @@ useEffect(() => {
                 {/* </Box> */}
               </Modal> 
                 {open && <ChatComponent open={open} handleClose={handleModalClose} petId={sessionStorage.getItem('petId')} petName={sessionStorage.getItem('petName')}/>} 
+      
       </Box>
+      <Footer></Footer>
+      </section>
     );
 };
 
