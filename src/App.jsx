@@ -32,7 +32,14 @@ import Footer from "./components/layout/Footer.jsx";
 import ShopHomePage from "./components/Home/ShopHomePage";
 import Login from "./components/Auth/Login.Jsx";
 import AttendanceSheet from "./components/Attendance/AttendanceSheet.jsx";
-
+import InventoryHistory from "./pages/inventory/InventoryHistory.jsx";
+import InventoryDetailsForm from "./pages/inventory/InventoryDetailsForm.jsx";
+import AdminView from "./pages/employee/AdminView.jsx";
+import EmployeeHistory from "./pages/employee/EmployeeHistory.jsx";
+import EmployeeDetailsForm from "./pages/employee/EmployeeDetailsForm.jsx";
+import BillHistory from "./pages/bill/BillHistory.jsx";
+import AttendanceHistory from "./pages/employee/AttendanceHistory.jsx";
+import BillDetailsForm from "./pages/bill/BillDetailsForm.jsx";
 
 function App() {
   const theme = createTheme({
@@ -45,37 +52,69 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <>
-    <main>
-      <Router>
-        <NavBar/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/edit-product/:productId" element={<EditProduct/>}/>
-          <Route path="/existing-products" element={<ExistingProducts/>}/>
-          <Route path="/add-product" element={<AddProduct/>}/>
-          <Route path="/hospital-services" element={<HospitalServices/>}/>
-          <Route path="/book-appointment" element={<AppointmentDetailsForm/>}/>
-          <Route path="/existing-appointments" element={<ExistingAppointments/>}/>
-          <Route path="/products/all-products" element={<ProductListing/>}/>
-          <Route path="/shop" element={<ShopHomePage/>}/>
-          <Route path="/about-us" element={<AboutUs/>}/>
-          <Route path="/contact-form" element={<ContactForm/>}/>
-          <Route path="/testimonials" element={<TestiMonials/>}/>
-          <Route path="/message-success" element={<ContactSucess/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Registraion/>}/>
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/pet" element={<PetPage/>}/>
-          <Route path="/medical-records" element={<TreatementHistory/>}/>
-          <Route path="/pet-update" element={<PetDetailsForm/>}/>
-          <Route path="/pet-add" element={<AddPetForm/>}/>
-          <Route path="/attendance-veiw" element={<AttendanceSheet/>}/>
-        </Routes>
-      </Router>
-    </main>
-    
-    </>
+      <>
+        <main>
+          <Router>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/edit-product/:productId"
+                element={<EditProduct />}
+              />
+              <Route path="/existing-products" element={<ExistingProducts />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/hospital-services" element={<HospitalServices />} />
+              <Route
+                path="/book-appointment"
+                element={<AppointmentDetailsForm />}
+              />
+              <Route
+                path="/existing-appointments"
+                element={<ExistingAppointments />}
+              />
+              <Route
+                path="/products/all-products"
+                element={<ProductListing />}
+              />
+              <Route path="/shop" element={<ShopHomePage />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact-form" element={<ContactForm />} />
+              <Route path="/testimonials" element={<TestiMonials />} />
+              <Route path="/message-success" element={<ContactSucess />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Registraion />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/pet" element={<PetPage />} />
+              <Route path="/medical-records" element={<TreatementHistory />} />
+              <Route path="/pet-update" element={<PetDetailsForm />} />
+              <Route path="/pet-add" element={<AddPetForm />} />
+              <Route path="/attendance-veiw" element={<AttendanceSheet />} />
+              <Route
+                path="/employee-create"
+                element={<EmployeeDetailsForm />}
+              />
+              <Route
+                path="/employee-update"
+                element={<EmployeeDetailsForm />}
+              />
+              <Route path="/employee-history" element={<EmployeeHistory />} />
+              <Route path="/bill-create" element={<BillDetailsForm />} />
+              <Route path="/bill-update" element={<BillDetailsForm />} />
+              <Route path="/bill-history" element={<BillHistory />} />
+              <Route
+                path="/inventory-create"
+                element={<InventoryDetailsForm />}
+              />
+              <Route
+                path="/inventory-update"
+                element={<InventoryDetailsForm />}
+              />
+              <Route path="/inventory-history" element={<InventoryHistory />} />
+            </Routes>
+          </Router>
+        </main>
+      </>
     </ThemeProvider>
   );
 }
