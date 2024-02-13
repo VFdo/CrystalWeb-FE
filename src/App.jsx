@@ -27,9 +27,9 @@ import AppointmentDetailsForm from "./components/Appointment/AppointmentDetailsF
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./components/layout/Footer.jsx";
 import ShopHomePage from "./components/Home/ShopHomePage";
-import Login from "./components/Auth/Login.jsx";
 import AttendanceSheet from "./components/Attendance/AttendanceSheet.jsx";
 import AppointmentsTable from "./components/Appointment/AppointmentsTable.jsx";
+import Login from "./components/Auth/Login.Jsx";
 
 function App() {
   const theme = createTheme({

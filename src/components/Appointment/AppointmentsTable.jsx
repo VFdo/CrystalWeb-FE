@@ -49,6 +49,7 @@ const AppointmentsTable = () => {
         console.log("Fetching data...");
 
         const res = await fetch("http://localhost:8080/appointment");
+        // const res = await fetch("http://localhost:8080/appointments");
         if (!res.ok) {
           throw new Error("Failed to fetch pets");
         }
