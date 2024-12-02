@@ -1,8 +1,37 @@
-# React + Vite
+![GitHub contributors](https://img.shields.io/github/contributors/VFdo/CrystalWeb-BE) ![GitHub License](https://img.shields.io/github/license/VFdo/CrystalWeb-FE)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# CrystalWeb-FE
+
+A Veterinary Clinic Management System
+
+## Overview
+
+The web application for Crystal Animal Clinic acts as an online web portal that connects the users and services of the veterinary clinic.
+
+## Components
+
+#### Users
++ System admin
++ Employees(vets and staff)
++ Clients
+
+#### Services
++ Appointment services
++ Client services
++ Employee services
++ Inventory services
++ Medical record services
++ Pet services
++ Pet store services
++ Vet services
+
+#### Special Features
++ Email reminders
++ Chat
+
+## Contributors
+<a href="https://github.com/VFdo/CrystalWeb-BE/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=VFdo/CrystalWeb-BE" />
+</a>
